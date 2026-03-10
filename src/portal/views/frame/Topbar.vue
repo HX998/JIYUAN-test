@@ -437,6 +437,10 @@ export default {
       this.MenuLayer = false;
     },
     turnPage(item) {
+      //用户快速重复点击时如果已经在当前页面，则不做任何处理，防止 NavigationDuplicated 错误
+      if (this.$route && this.$route.path === item.path) {
+        return; // nothing to do
+      }
       //根据菜单调整左侧菜单树展示内容
       let currentActiveIndex = item.id.toString().substr(0,1);
       for (let i=0; i< this.menusRoot.length; i++) {
@@ -449,21 +453,22 @@ export default {
       let isOpened = this.$store.getters.openedRouterList.some(child => {
         return item.path === child.path;
       });
-      if (isOpened) {
-        this.$router.push({
+      const navigate = () => {
+        return this.$router.push({
           path: item.path,
           query: item.connectMode === "embed" ? { embedPath: item.embedPath.substring(item.embedPath.indexOf('url')).split('=')[1] } : {}
+        }).catch(err => {
+          // 忽略重复导航错误，其它错误继续抛出
+          if (err && err.name === 'NavigationDuplicated') return err;
+          throw err;
         });
-        // this.$router.push(item.path);
+      };
+      if (isOpened) {
+        navigate();
       } else {
         this.$store.dispatch("GenerateRoutesByMenus", [item]).then((res) => {
           this.$router.addRoutes(this.$store.getters.addRouters);
-          // 路由未定义
-          // this.$router.push(item.path);
-          this.$router.push({
-            path: item.path,
-            query: item.connectMode === "embed" ? { embedPath: item.embedPath.substring(item.embedPath.indexOf('url')).split('=')[1] } : {}
-          });
+          navigate();
         });
       }
     },

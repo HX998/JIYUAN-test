@@ -328,6 +328,16 @@ router.beforeEach((to, from, next) => {
   // if (window.parent) window.LOCAL_CONFIG.isFrame = true
   // if (isIE) window.LOCAL_CONFIG.isFrame = true
   hui.hLoadingBar.start();
+  // 特殊情况：刚从登录页跳到主页面，登录流程会先 push('/mainIndex')，
+  // 此时尚未生成动态路由，后面的菜单逻辑可能认为目标无匹配并
+  // 重定向回 '/'，触发浏览器控制台警告“Redirected when going from
+  // "/login" to "/mainIndex" via a navigation guard”。
+  // 直接放行可避免该警告。
+  if (from.path === '/login' && to.path === '/mainIndex') {
+    next();
+    hui.hLoadingBar.finish();
+    return;
+  }
   if (window.LOCAL_CONFIG.isToken) {
     if (store.getters.token && store.getters.userInfo != null) { //有token且用户信息不为空，证明已登录
       if (Object.keys(to.query).length > 0 && to.query.bbspIsLogout) {//同一标签页下，bbsp带缓存访问bemp时显示登录页
@@ -369,7 +379,11 @@ router.beforeEach((to, from, next) => {
         window.sessionStorage.setItem("isNeedAutoLoad", "1");
         next()
       } else if (to.path === "/login") {
-        next({ path: "/" });
+        // token 已存在的情况下，不在 beforeEach 内部重定向避免导航警告
+        // 调用 next(false) 取消当前导航，再用 replace 来切换路由。
+        next(false);
+        router.replace({ path: "/mainIndex" });
+        return;
       } else if (to.path === "/logout") {
         next();
       } else {

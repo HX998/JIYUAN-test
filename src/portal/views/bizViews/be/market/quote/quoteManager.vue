@@ -1048,7 +1048,7 @@
       SaleDetail:()=>import(/* webpackChunkName: "be/market/quote/sale/saleDetail" */`@/views/bizViews/be/market/quote/sale/saleDetail`),
       RebuyDetailPrint:()=>import(/* webpackChunkName: "be/market/quote/rebuy/rebuyDetailPrint" */`@/views/bizViews/be/market/quote/rebuy/rebuyDetailPrint`),
       SaleDetailPrint:()=>import(/* webpackChunkName: "be/market/quote/sale/saleDetailPrint" */`@/views/bizViews/be/market/quote/sale/saleDetailPrint`),
-      ApprovalPrint:()=>import(/* webpackChunkName: "be/market/quote/print/approvalPrint */`@/views/bizViews/be/market/quote/print/approvalPrint`),
+      ApprovalPrint:()=>import(/* webpackChunkName: "be/market/quote/print/approvalPrint" */`@/views/bizViews/be/market/quote/print/approvalPrint`),
       BrchCodeSearch:()=>import(/* webpackChunkName: "sm/auth/branch/cpesBrchCodeSearch" */`@/views/bizViews/sm/auth/branch/cpesBrchCodeSearch`),
       TraderIdSearch:()=>import(/* webpackChunkName: "shcpe/cpes/trader/traderIdSearch" */`@/views/bizViews/shcpe/cpes/trader/traderIdSearch`),
       //ShowLicenseBranch: () => import(/* webpackChunkName: "sm/auth/branch/showLicenseBranch" */`@/views/bizViews/sm/auth/branch/showLicenseBranch`)

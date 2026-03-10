@@ -7,7 +7,7 @@ module.exports = defineConfig({
   configureWebpack: {
     resolve: {
       alias: {
-        '@portal': path.resolve(__dirname, 'src/portal/'),
+        // '@': path.resolve(__dirname, 'src/portal/'),
         'common': path.resolve(__dirname, 'src/common/'),
         // 如果有其他别名，也可以加在这里
       }
@@ -29,7 +29,12 @@ module.exports = defineConfig({
   css: {
     loaderOptions: {
       css: {
-        url: false  // 完全关闭所有 url() 的模块解析
+        // allow url() references to be processed by webpack so background images
+        // written in global styles (e.g. frame_login.scss) are correctly
+        // resolved. 以前为了避免某些 URL 被处理关闭了这个选项，导致
+        // 登录选项图标的背景图路径保持为 "~@/assets/..."，浏览器无法
+        // 访问，从而图标不显示。
+        url: true
       }
     }
   },
