@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script type="text/javascript">
+    function init(){
+      let ObjUImg = document.getElementById("ObjUImage");
+      ObjUImg.ItemSplitScreen(4);
+      ObjUImg.URL=window.parent.LOCAL_CONFIG.IMG_URL;
+      window.addEventListener('message', function (e) {
+        if (e.data.docid !== "" && e.data.cliciEvent === "1") {
+          btnBusinessViewOnclick(e.data);
+        } else if (e.data.docid === "" && e.data.cliciEvent === "1"){
+          btnBcOnclick(e.data);
+        } else if (e.data.cliciEvent === "submit") {
+          btnSubmit(e.data);
+        }
+      }, false)
+    }
+    function btnBcOnclick(params){
+      let ObjUImg = document.getElementById("ObjUImage");
+      ObjUImg.BusinessCreate(params.sysNo,params.busiNo,params.orgNo,params.tellerNo,"0");
+    }
+    function btnBusinessViewOnclick(params){
+      let ObjUImg = document.getElementById("ObjUImage");
+      try {
+        ObjUImg.BusinessView(params.sysNo,params.busiNo,params.orgNo,params.tellerNo,"0",params.docid);
+      } catch(err) {
+        alert(err.description);
+      }
+    }
+    function btnSubmit() {
+      let ObjUImg = document.getElementById("ObjUImage");
+      let docId = ObjUImg.Submit(0);
+      console.log("docId="+docId);
+      if(docId!=="") {
+        window.parent.postMessage({"docId": docId},"*");
+      }
+    }
+  </script>
+</head>
+<body onload="init()">
+  <object id="ObjUImage" classid="clsid:17E03D90-5299-474b-A5F0-9CCC0BB094F1" width="100%" height="100%">
+  </object>
+</body>
+</html>

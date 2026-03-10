@@ -1,0 +1,88 @@
+<!--业务类型-->
+<template>
+  <h-form-item :label="label" :prop="prop" :required="required">
+    <h-select v-model="itemValue" :placeholder="placeholder" :showTitle="showTitle" :readonly="readonly"
+              :clearable="clearable" @on-change="onChange" :setDefSelect="setDefSelect" :disabled="disabled">
+      <h-option v-for="item in dictList" :value="item[paramsMap.key]" :key="item[paramsMap.key]">
+        {{item[paramsMap.value]}}
+      </h-option>
+    </h-select>
+  </h-form-item>
+</template>
+
+<script>
+  export default {
+    name: "busiType",
+    props: {
+      label: {
+        type: String,
+        default() {
+          return this.$t("m.i.common.busiType");
+        }
+      },
+      prop: {
+        type: String,
+        default: "busiType"
+      },
+      required: {
+        type: Boolean,
+        default: false
+      },
+      value: {
+        type: String,
+        default: ""
+      },
+      placeholder: {
+        type: String,
+        default: ""
+      },
+      readonly: {
+        type: Boolean,
+        default: false
+      },
+      showTitle: {
+        type: Boolean,
+        default: true
+      },
+      clearable: {
+        type: Boolean,
+        default: true
+      },
+      dictList: {
+        type: Array,
+        default() {
+          return [];
+        }
+      },
+      paramsMap: {//查询获取下拉数据时对应的key-value，默认从数据字典取值
+        type: Object,
+        default() {
+          return { key: "key", value: "value" };
+        }
+      },
+      setDefSelect: {
+        type: Boolean,
+        default: false
+      },
+      disabled: {
+        type: Boolean,
+        default: false
+      }
+    },
+    computed: {
+      itemValue: {
+        get() {
+          return this.value;
+        },
+        set(val) {
+          this.$emit("input", val);
+        }
+      }
+    },
+    methods: {
+      onChange(val) {
+        this.$emit("on-change", val);
+      }
+    }
+  };
+</script>

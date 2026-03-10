@@ -1,0 +1,404 @@
+.h-datagrid {
+  background: #fff;
+}
+.h-datagrid-title {
+  height: 32px;
+  padding: 5px 18px 4px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom: 1px solid transparent;
+
+  color: #192229;
+  background: #fff;
+  border-bottom: 1px solid #DCE1E3;
+  h4 {
+    margin: 0;
+    font-weight: bold;
+    line-height: 22px;
+  }
+}
+.h-datagrid-toolbar {
+  padding: 20px 20px 15px 20px;
+  min-height: 48px;
+  border-bottom: 1px solid #dce1e3;
+  border-width: 1px 1px 0;
+  // .pull-left {
+  //   float: left;
+  // }
+  .pull-right {
+    float: right;
+  }
+  .h-advanced {
+    position: relative;
+    width: 100%;
+    right: 4px;
+    .h-bth {
+      margin-right: 0;
+      height: 32px;
+      width: 32px;
+      padding: 0;
+      float: right;
+    }
+  }
+  .h-btn {
+    padding: 6px 12px;
+    margin-right: 4px;
+    > .h-icon + span,
+    > span + .h-icon{
+      font-size: 12px;
+      margin-left: 0;
+    }
+    .iconfont {
+      font-size: 12px;
+    }
+    &.h-btn-disable > .h-icon + span,
+    &.h-btn-disable > span + .h-icon,
+    &.h-btn-disable > .iconfont {
+      color: inherit;
+    }
+  }
+  .h-btn-ghost:hover{
+    > .h-icon + span,
+    > span + .h-icon{
+      color: #fff !important;
+    }
+    .iconfont {
+      font-size: 12px;
+      color: #fff !important;
+    }
+  }
+  .downloadInfo {
+    padding: 3px 9px;
+    height: 32px;
+    border: 1px solid #D7DDE4;
+  }
+  .downloadInfo:hover {
+    border: 1px solid #5ca8ff;
+  }
+}
+.h-datagrid .h-table-box {
+  padding: 0px 20px;
+}
+.h-datagrid .h-table-small .h-table-header {
+  color: #192229;
+  th{
+    background: #eaedf1;
+  }
+}
+.h-datagrid .h-editgird-small .h-editgird-header {
+  color: #192229;
+}
+.h-datagrid .h-table-small td {
+  height: 30px;
+}
+.h-datagrid .h-select-item {
+  padding: 3px 16px;
+}
+.h-datagrid .h-table-fixed-body td .h-icon{
+  font-size:18px;
+  cursor: pointer;
+  &:after {
+    content: '';
+    display: inline-block;
+    background: #dce1e3;
+    width: 1px;
+    height: 10px;
+    margin: 0 6px;
+  }
+  &:last-child:after {
+    display: none;
+  }
+}
+
+.h-datagrid .h-page {
+  margin: 5px;
+  padding: 10px 5px 5px 5px;
+  .h-page-prev,
+  .h-page-next,
+  .h-page-item-jump-prev,
+  .h-page-item-jump-next,
+  .h-page-item,
+  .h-page-options-elevator input {
+    height: 26px;
+    line-height: 24px;
+    min-width: 24px;
+  }
+  .h-select-single {
+    .h-select-selection {
+      height: 28px;
+      line-height: 26px;
+      .h-select-placeholder,
+      .h-select-selected-value {
+        height: 28px;
+        line-height: 26px;
+      }
+    }
+  }
+}
+
+// 自定义列表项选择框样式
+.h-table-checkBox-container{
+  position:absolute;
+  padding: 5px 0px;
+  background: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 8px #ccc;
+  max-height:200px;
+  width: 120px;
+  overflow:auto;
+  z-index:9999;
+  margin-left: -80px;
+  // right: 20px;
+  .h-table-checkBox-group{
+    padding:5px 10px 5px 10px;
+    .h-table-checkBox{
+      .h-table-checkBox-item{
+        // display: inline-block;
+      }
+    }
+  }
+  .h-table-checkBox-group:hover{
+    background: rgb(243, 243, 243);
+  }
+}
+
+// 自定义列表项选择框样式
+.h-table-senior-container{
+  position:absolute;
+  padding: 5px 0px;
+  background: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 8px #ccc;
+  max-height:200px;
+  width: 100%;
+  overflow:auto;
+  z-index:999;
+  margin-left: 0%;
+  top: 40px;
+  .pull-center{
+    text-align: center;
+    padding-top: 2%;
+  }
+}
+
+.h-table-wrapper ,.h-editgird-wrapper{
+  // border-left:0;
+}
+/*修改table滚动条样式*/
+/* 滚动条 */
+::-webkit-scrollbar{
+  width:7px;
+  height:7px;
+  background-color: $scrollbar-bgcolor
+}
+::-webkit-scrollbar-track{
+  -webkit-box-shadow: none;
+  background-color: $scrollbar-bgcolor;
+}
+::-webkit-scrollbar-thumb{
+  border-radius: 10px;
+  background: $scrollbar-color;
+}
+::-webkit-scrollbar-thumb:hover{
+  cursor: pointer;
+  background: $scrollbar-hover-color;
+}
+
+.h-datagrid-title {
+  height: 32px;
+  padding: 5px 18px 4px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom: 1px solid transparent;
+
+  color: #192229;
+  background: #fff;
+  border-bottom: 1px solid #DCE1E3;
+  h4 {
+    margin: 0;
+    font-weight: bold;
+    line-height: 22px;
+  }
+}
+.h-datagrid-toolbar {
+  padding: 20px 20px 15px 20px;
+  min-height: 48px;
+  border-bottom: 1px solid #dce1e3;
+  border-width: 1px 1px 0;
+  // .pull-left {
+  //   float: left;
+  // }
+  .pull-right {
+    float: right;
+  }
+  .h-btn {
+    padding: 6px 12px;
+    margin-right: 4px;
+    > .h-icon + span,
+    > span + .h-icon{
+      font-size: 12px;
+      margin-left: 0;
+    }
+    .iconfont {
+      font-size: 12px;
+    }
+    &.h-btn-disable > .h-icon + span,
+    &.h-btn-disable > span + .h-icon,
+    &.h-btn-disable > .iconfont {
+      color: inherit;
+    }
+  }
+  .h-btn-ghost:hover{
+    > .h-icon + span,
+    > span + .h-icon{
+      color: #fff !important;
+    }
+    .iconfont {
+      font-size: 12px;
+      color: #fff !important;
+    }
+  }
+  .downloadInfo {
+    padding: 3px 9px;
+    height: 32px;
+    border: 1px solid #D7DDE4;
+  }
+  .downloadInfo:hover {
+    border: 1px solid #5ca8ff;
+  }
+}
+.h-datagrid .h-table-box {
+  padding: 0px 20px;
+}
+.h-datagrid .h-table-small .h-table-header {
+  color: #192229;
+  th{
+    background: #eaedf1;
+  }
+}
+.h-datagrid .h-editgird-small .h-editgird-header {
+  color: #192229;
+}
+.h-datagrid .h-table-small td {
+  height: 30px;
+}
+.h-datagrid .h-select-item {
+  padding: 3px 16px;
+}
+.h-datagrid .h-table-fixed-body td .h-icon{
+  font-size:18px;
+  cursor: pointer;
+  &:after {
+    content: '';
+    display: inline-block;
+    background: #dce1e3;
+    width: 1px;
+    height: 10px;
+    margin: 0 6px;
+  }
+  &:last-child:after {
+    display: none;
+  }
+}
+
+.h-datagrid .h-page {
+  margin: 5px;
+  padding: 10px 5px 5px 5px;
+  .h-page-prev,
+  .h-page-next,
+  .h-page-item-jump-prev,
+  .h-page-item-jump-next,
+  .h-page-item,
+  .h-page-options-elevator input {
+    height: 26px;
+    line-height: 24px;
+    min-width: 24px;
+  }
+  .h-select-single {
+    .h-select-selection {
+      height: 28px;
+      line-height: 26px;
+      .h-select-placeholder,
+      .h-select-selected-value {
+        height: 28px;
+        line-height: 26px;
+      }
+    }
+  }
+}
+
+// 自定义列表项选择框样式
+.h-table-checkBox-container{
+  position:absolute;
+  padding: 5px 0px;
+  background: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 8px #ccc;
+  max-height:200px;
+  width: 120px;
+  overflow:auto;
+  z-index:9999;
+  margin-left: -80px;
+  // right: 20px;
+  .h-table-checkBox-group{
+    padding:5px 10px 5px 10px;
+    .h-table-checkBox{
+      .h-table-checkBox-item{
+        // display: inline-block;
+      }
+    }
+  }
+  .h-table-checkBox-group:hover{
+    background: rgb(243, 243, 243);
+  }
+}
+
+.h-table-wrapper ,.h-editgird-wrapper{
+  // border-left:0;
+}
+/*修改table滚动条样式*/
+/* 滚动条 */
+::-webkit-scrollbar{
+  width:7px;
+  height:7px;
+  background-color: $scrollbar-bgcolor
+}
+::-webkit-scrollbar-track{
+  -webkit-box-shadow: none;
+  background-color: $scrollbar-bgcolor;
+}
+::-webkit-scrollbar-thumb{
+  border-radius: 10px;
+  background: $scrollbar-color;
+}
+::-webkit-scrollbar-thumb:hover{
+  cursor: pointer;
+  background: $scrollbar-hover-color;
+}
+// 表格汇总信息
+.h-datagrid-total{
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  .label {
+    font-size: 12px;
+    color: #666;
+    text-align: right;
+    line-height: 30px;
+    padding-right: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .val {
+    font-size:12px;
+    color:#000;
+    font-weight: 600;
+    line-height:30px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+

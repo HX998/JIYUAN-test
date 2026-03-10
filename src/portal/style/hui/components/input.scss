@@ -1,0 +1,169 @@
+$input-prefix-cls: "#{$css-prefix}input";
+
+.#{$input-prefix-cls} {
+  @include input();
+  &-type{
+    height:$form-component-height;
+  }
+  &-wrapper{
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    // vertical-align: top;
+    vertical-align: middle;
+  }
+  &-icon {
+    width: 38px;
+    height: $input-height-base;
+    line-height: $input-height-base;
+    text-align: center;
+    color: $icon-color;
+    position: absolute;
+    right: 0;
+    z-index: 3;
+  }
+  &-hide-icon &-icon{
+      display: none;
+  }
+  &-icon-validate{
+    display: none;
+  }
+
+  &-icon-normal + &{
+    padding-right: 32px;
+  }
+  // #554
+  &-hide-icon &-icon-normal + &{
+    padding-right: $input-padding-horizontal;
+  }
+
+  &-wrapper-large &-icon{
+    font-size: 14px;
+    height: $input-height-large;
+    line-height: $input-height-large;
+  }
+  &-wrapper-small &-icon{
+    width: 24px;
+    font-size: 12px;
+    height: $input-height-small;
+    line-height: $input-height-small;
+
+    //+ .@{input-prefix-cls} {
+    //    padding-right: 24px;
+    //}
+  }
+  &-left{
+    text-align:left;
+  }
+  &-center{
+    text-align:center;
+  }
+  &-right{
+    text-align:right;
+  }
+  &-tips{
+    padding-top: 5px;
+    ul{
+      li{
+        display: inline-block;
+        width: 25%;
+        max-width: 100px;
+        text-align: center;
+        div{
+          height: 4px;
+          background:$border-color-base;
+          margin-bottom: 2px;
+        }
+      }
+    }
+    &-weak{
+      background:$error-color !important;
+    }
+    &-general{
+      background:$warning-color !important;
+    }
+    &-complex{
+      background:$success-color !important;
+    }
+  }
+  &-noresize{
+    resize:none;
+  }
+}
+// Reset height for textarea
+textarea.#{$input-prefix-cls} {
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
+  font-size: $font-size-small;
+  overflow:auto;
+  //white-space:normal;
+}
+
+.#{$input-prefix-cls}-group{
+  @include input-group("#{$input-prefix-cls}");
+}
+
+.#{$form-item-prefix-cls}-error{
+  .#{$input-prefix-cls}{
+    @include input-error();
+    &-icon{
+      color: $error-color;
+    }
+  }
+  .#{$input-prefix-cls}-group{
+    @include input-group-error();
+  }
+  .#{$transfer-prefix-cls} {
+    .#{$input-prefix-cls} {
+      @include input();
+      &-icon{
+        color: $icon-color;
+      }
+    }
+  }
+}
+.#{$form-item-prefix-cls}-changed{
+  .#{$input-prefix-cls}{
+    @include changed();
+  }
+}
+.#{$form-item-prefix-cls}-validating{
+  .#{$input-prefix-cls}{
+    &-icon-validate{
+        display: inline-block;
+    }
+    &-icon + .#{$input-prefix-cls}{
+        padding-right: 32px;
+    }
+  }
+}
+.#{$editgird-prefix-cls}-cell-error{
+  .#{$input-prefix-cls}{
+    @include input-error();
+    &-icon{
+      color: $error-color;
+    }
+  }
+  .#{$input-prefix-cls}-group{
+    @include input-group-error();
+  }
+  .#{$transfer-prefix-cls} {
+    .#{$input-prefix-cls} {
+      @include input();
+      &-icon{
+        color: $icon-color;
+      }
+    }
+  }
+}
+.#{$editgird-prefix-cls}-validating{
+  .#{$input-prefix-cls}{
+    &-icon-validate{
+        display: inline-block;
+    }
+    &-icon + .#{$input-prefix-cls}{
+        padding-right: 32px;
+    }
+  }
+}

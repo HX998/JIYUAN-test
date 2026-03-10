@@ -1,0 +1,20 @@
+.szbank {
+  @import "/src/portal/style/theme/green2/main.scss";
+
+  //login
+  .app-login {
+    .app-login-bg {
+      height: 30%;
+      //background: url("/src/portal/assets/szbank/login-bg.jpg") no-repeat center bottom;
+      background-size: 100% 100%;
+    }
+  }
+
+  textarea.h-input {
+    min-height: 32px !important;
+    line-height: 18px;
+    vertical-align: middle;
+    white-space:pre-wrap;
+    word-break:break-all;
+  }
+}

@@ -1,0 +1,159 @@
+.theme-black body {
+  background: #f8f9fa;
+}
+#app {
+  font-family: $font-family;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  //text-align: center;
+  color: #2c3e50;
+}
+.app-wrapper {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.main-wrapper {
+  margin: $topbar-base-height + $navbar-base-height 0 0 $sidebar-base-width;
+  background: $body-color;
+}
+.hideSidebar.main-wrapper {
+  margin: $topbar-base-height + $navbar-base-height 0 0 $sidebar-collapse-width;
+}
+// 首页
+// .isMainIndex.main-wrapper,
+// .isMainIndex.hideSidebar.main-wrapper{
+//   margin-left: 0;
+// }
+
+
+
+.app-main{
+  // ie下遮罩全部
+  // margin-left: 10px;
+  // margin-right: 10px;
+  // border-radius: 5px;
+  // padding: 2px 5px 0;
+  text-align: left;
+  .h-main-search {
+    padding:9px 15px 9px 0;
+    margin-bottom: 8px;
+    background:#fff;
+    > h5 {
+      font-size:14px;
+      color:#333333;
+      padding:0 0 10px 15px;
+    }
+    .h-form-item {
+      // float: left;
+      // width: 218px;
+      > label {
+        color:#333333;
+      }
+      input:focus,
+      .h-select-selection:focus   {
+        box-shadow: none;
+      }
+      &.no-label {
+        width: 260px;
+      }
+      &.no-label .h-form-item-content{
+        margin-left: 0 !important;
+        padding-left: 20px;
+      }
+    }
+  }
+
+
+  //background: $base-color;
+
+  // ::-webkit-scrollbar {
+  //   width: static;
+  //   height: static;
+  //   background-color: static;
+  // }
+  // ::-webkit-scrollbar-track{
+  //   -webkit-box-shadow: static;
+  //   background-color: static;
+  // }
+  // ::-webkit-scrollbar-thumb{
+  //   border-radius: static;
+  //   background: static;
+  // }
+}
+
+// :-webkit-full-screen {
+//   background: $body-color;
+// }
+// html {
+//   ::-webkit-scrollbar {
+//     width: 10px;
+//     height: 10px;
+//     background-color: $scrollbar-body-bgcolor;
+//   }
+//   ::-webkit-scrollbar-track{
+//     -webkit-box-shadow: inset 0 0 6px $scrollbar-color;
+//     background-color: $scrollbar-body-bgcolor;
+//   }
+//   ::-webkit-scrollbar-thumb{
+//     border-radius: 8px;
+//     background: $scrollbar-body-color;
+//   }
+// }
+
+/*app-main下的layout左右两侧布局*/
+.layout{
+  position: relative;
+  overflow: hidden;
+}
+.layout-menu-wrapper{
+  min-width: 915px;
+}
+// .layout-menu-left{
+//   min-width: 152px;
+// }
+.layout-menu-right{
+  min-width: 760px;
+}
+.h-col{
+  transition: width .2s ease-in-out;
+}
+
+//修改selecttree图标
+.h-selectTree .h-selectTree-editable .h-selectTree-single .h-selectTree-default{
+  .h-selectTree-selection{
+    .icon-unfold:before{
+      content:"\111111";
+    }
+  }
+}
+
+/* 可以设置不同的进入和离开动画 */
+/* 设置持续时间和动画函数 */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .3s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+.component-fade-enter-active, .component-fade-leave-active {
+  transition: opacity .3s ease;
+}
+.component-fade-enter, .component-fade-leave-to
+/* .component-fade-leave-active for below version 2.1.8 */ {
+  opacity: 0;
+}
+
+.server-name-div{
+  display: flex;
+}
+.server-name-button{
+  width:60px;
+  margin-top: 2%;
+  text-align: center;
+}
+.server-name-input {
+  flex-grow: 1;
+}
+

@@ -1,0 +1,260 @@
+  .layout-hide-text  .h-col-span-1 {
+    width: 2%;
+    min-width: 15px;
+    }
+  .layout-hide-text  .h-col-span-23 {
+    width: 98%;
+  }
+
+  //修改tree图标
+  .h-tree-arrow .iconfont{
+    transform: none !important;
+  }
+  .h-tree-arrow .icon-ios-arrow-right:before{
+    content:"\e6d0";
+  }
+  .h-tree-arrow-open .iconfont{
+    transform: none !important
+  }
+  .h-tree-arrow-open .icon-ios-arrow-right:before{
+    content:"\e6d1";
+  } 
+
+  /*tree打开时样式*/
+  .h-msidebar-wrapper {
+    top: 34px;
+    bottom:0;
+    left: 0;
+    min-width: 145px;
+    background:#fff;
+    border-right: 8px solid #f8f9fa;
+    .h-msidebar-head {
+      height: 35px;
+      padding:0 8px 0 9px;
+      border-bottom:1px solid #dce1e3;;
+      line-height: 35px;
+      .msidebar-head-pic {
+        float: left;
+        margin:6px 11px 0 0;
+      }
+      .msidebar-head-title {
+        float: left;
+        font-size:14px;
+        color:#333333;
+        line-height:32px;
+        font-weight: $bold-font;
+      }
+      .msidebar-head-icon {
+        float: right;
+        .h-icon {
+          font-size:12px;
+          cursor: pointer;
+        }
+      }
+    }
+    .h-msidebar-body {
+      padding:12px 8px;
+      .msidebar-body-searchbox {
+        .h-select {
+          width: 100% !important;
+          .h-select-selection {
+            border-color:#d7dde4;
+            box-shadow: none;
+          }
+        }
+      }
+      .msidebar-body-list {
+        margin-top: 6px;
+        .h-menu {
+          width: 100% !important;
+          .h-menu-submenu-title {
+            font-size:12px;
+            color:#333333;
+            padding: 8px 12px;
+            line-height: 16px;
+            background-image:linear-gradient(45deg, rgba(55,99,226,0.25) 0%, rgba(93,151,237,0.00) 100%);
+            &:before {
+              content:'';
+              display: inline-block;
+              width: 4px;
+              height: 4px;
+              border-radius:2px;
+              background:#fff;
+              margin-right: 8px;
+              position: relative;
+              top: -2px;
+            }
+            .h-icon {
+              top: 9px;
+            }
+          }
+          .h-menu {
+            // margin-top: 6px;
+            .h-tree {
+              padding-left: 8px;
+              overflow: auto;
+              .h-tree-arrow i {
+                font-size: 16px;
+              }
+              .h-tree-title{
+                padding-top: 0px;
+                vertical-align: text-bottom;
+              }
+            }
+          }
+          &:after {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  /* tree折叠后样式 */
+  .hideMSidebar {
+      left: 5px;
+      text-align: center;
+      /* background: #fff; */
+      border-right: 8px solid #f8f9fa;
+      border-radius: 4px;
+      i {
+        font-size:12px;
+        cursor: pointer;
+        width:12px;
+        height:12px;
+        line-height: 36px;
+      }
+  }
+
+/* 5.0系统菜单模块样式 sidebar menu-tree */
+.h-sidebar-menutree {
+  // position: absolute;
+  left: 0;
+  top: 34px;
+  bottom:0;
+  // width: 185px;
+  min-width: 145px;
+  border-right: 8px solid #f0f3f4;
+  background:#fff;
+  .h-sidebar-menutree-header {
+    height: 40px;
+    padding:4px 8px 4px 11px;
+    border-bottom: 1px #dce1e3 solid;
+    .menutree-header-pic {
+      float: left;
+      padding:5px 9px 0 0 ;
+    }
+    .menutree-header-title {
+      float: left;
+      line-height: 32px;
+      font-size:14px;
+      color:#333333;
+      font-weight: 700;
+    }
+    .menutree-header-btn {
+      float: right;
+      line-height: 28px;
+      margin-left: 4px;
+      .h-btn {
+        width: 22px;
+        height: 22px;
+        padding:0;
+        // margin-left: 4px;
+        .h-icon {
+          font-size:14px;
+          color:#495060;
+        }
+        &[disabled] .h-icon {
+          color:#d7dde4;
+        }
+      }
+    }
+  }
+  .h-sidebar-menutree-body {
+    .h-tree {
+      padding-left: 8px;
+      .h-tree-arrow i {
+        font-size: 16px;
+      }
+      .h-tree-title{
+        padding-top: 0px;
+        vertical-align: text-bottom;
+      }
+    }
+  }
+}
+
+//修改弹出框中tree的图标样式
+  .h-modal-body  .h-tree-search .h-tree-content .h-tree-self .h-tree-arrow .iconfont{
+    font-size: 16px;
+  }
+  .h-modal-body .h-tree-search .h-tree-content .h-tree-self .h-tree-title {
+    padding-top: 0px;
+    vertical-align: text-bottom;
+  }
+
+//替换selectTree的图标大小
+.h-selectTree .h-select-dropdown .h-tree {
+  i {
+    font-size: 13px;
+  }
+  span {
+    padding-top: 0px;
+  }
+}
+
+/*tree加载中样式*/
+.h-tree-loading {
+  color: rgb(41, 141, 255);
+  position:absolute; 
+  /* left:10%;  */
+  top:100px; 
+  height: 300px;
+  width: 1050px;
+  /* margin-left: -110px;  */
+  z-index:9999;
+  background: #fff;
+} 
+.h-tree-loading-text{
+  color: rgb(41, 141, 255);
+  position:absolute; 
+  left:50%; 
+  top:50%;
+  width:220px; 
+  height:20px; 
+  margin-left: -110px; 
+  z-index:10000;
+ } 
+.h-tree-loading-text-icon {
+    display: inline-block;
+    position: relative;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 1s linear infinite;
+}
+@-webkit-keyframes spin {
+    0%   {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes spin {
+    0%   {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+
+  

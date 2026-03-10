@@ -1,0 +1,21 @@
+{
+  "presets": [
+    "@vue/cli-plugin-babel/preset",
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "usage",
+        "corejs": 3
+      }
+    ]
+  ],
+  "plugins": [
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    "@babel/plugin-proposal-class-properties"
+  ],
+  "overrides": [
+    {
+      "exclude": ["**/babel-preset-stage-2/**"]
+    }
+  ]
+}

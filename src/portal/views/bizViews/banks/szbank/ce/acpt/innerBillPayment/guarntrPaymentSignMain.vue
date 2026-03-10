@@ -1,0 +1,550 @@
+<template>
+  <div class="layout">
+    <h-row name="flex" class="layout-menu-wrapper">
+      <h-col span="24">
+        <div>
+          <div class="h-form-search-box">
+            <!-- 查询表单 -->
+            <h-panel class="clearfix" :class="{'h-form-overhd':!ifShowMore}">
+              <h-form :model="formItem" :label-width="90" ref="formItem" cols="4" class="h-form-search">
+                <!--票据来源：下拉框-->
+                <h-form-item :label="$t('m.i.billInfo.billOrigin')" prop="billOrigin">
+                  <h-select v-model="formItem.billOrigin" placeholder="">
+                    <h-option v-for="item in billOriginList" :value="item.key" :key="item.key">{{
+                        item.value
+                      }}
+                    </h-option>
+                  </h-select>
+                </h-form-item>
+                <!--票据（包）号码：-->
+                <h-form-item prop="billNoLike" :label="$t('m.i.billInfo.billPackageNo')">
+                  <h-input v-model="formItem.billNoLike" placeholder=""></h-input>
+                </h-form-item>
+                <!--子票区间：区间框-->
+                <bill-range :form-item="formItem" :range-props="['minBillRangeStart','maxBillRangeEnd']"></bill-range>
+                <h-form-item prop="otherBankAcptMark" :label="$t('m.i.ce.otherBankAcptMark')">
+                  <h-select v-model="formItem.otherBankAcptMark" placeholder="" showTitle>
+                    <h-option v-for="item in YonList" :value="item.key" :key="item.key">{{ item.value }}</h-option>
+                  </h-select>
+                </h-form-item>
+                <h-form-item prop="remitDt" :label="$t('m.i.billInfo.remitDt')">
+                  <h-date-picker type="daterange" :value="formItemRemitDt" format="yyyy-MM-dd" showFormat
+                                 :editable=false placeholder="" @on-change="handleRemitDtChange"
+                                 autoPlacement></h-date-picker>
+                </h-form-item>
+                <h-form-item prop="dueDt" :label="$t('m.i.billInfo.dueDt')">
+                  <h-date-picker type="daterange" :value="formItemDueDt" format="yyyy-MM-dd" showFormat :editable=false
+                                 placeholder="" @on-change="handleDueDtChange" autoPlacement></h-date-picker>
+                </h-form-item>
+
+                <h-form-item prop="prsttnName" :label="$t('m.i.billInfo.prsttnName')" class="h-form-long-label">
+                  <h-input v-model="formItem.prsttnName" placeholder=""></h-input>
+                </h-form-item>
+                <h-form-item prop="prsttnAcctNo" :label="$t('m.i.billInfo.prsttnAcctNo')" class="h-form-long-label">
+                  <h-input v-model="formItem.prsttnAcctNo" placeholder=""></h-input>
+                </h-form-item>
+                <h-form-item class="h-form-operate">
+                  <span class="h-more-input" @click="ifShowMore=!ifShowMore">{{ $t('m.i.common.searchAdvanced') }}<i
+                    class="icon iconfont"
+                    :class="{'icon-arrow-down-screensv':!ifShowMore,'icon-arrow-up-screen':ifShowMore}"></i></span>
+                  <h-button type="primary" @click="handleSearch()">{{ $t('m.i.common.search') }}</h-button>
+                  <h-button type="ghost" @click="resetSearch()">{{ $t('m.i.common.reset') }}</h-button>
+                </h-form-item>
+
+              </h-form>
+            </h-panel>
+          </div>
+          <!-- 数据展示表格 -->
+          <h-datagrid :columns="columns"
+                      highlightRow
+                      :row-select="true"
+                      :has-select="false"
+                      url="/banks/szbank/ce/acpt/innerBillPayment/guarntrPaymentSignMain/func_pageQueryGuarntrPaymentSignList"
+                      :bindForm="formItem"
+                      ref="datagrid">
+            <div slot="toolbar" class="pull-left">
+              <h-button type="primary" @click="paymentSign">{{ $t("m.i.common.agree") }}</h-button>
+              <h-button type="primary" @click="paymentRefuse">{{ $t("m.i.common.refuse") }}</h-button>
+            </div>
+          </h-datagrid>
+        </div>
+
+        <!-- 拒付弹窗 -->
+        <h-msg-box v-model="refuseWin" width="400" @on-close="refuseWinClose"
+                   class="h-form-search-layer" :maximize="true" :mask-closable="false">
+          <p slot="header">
+            <span>提示付款拒绝</span>
+          </p>
+          <div>
+            <h-form :model="refuseForm" :label-width="115" ref="refuseForm" cols="1"
+                    class="h-form-search">
+              <h-form-item prop="payRefuseCode" :label="$t('m.i.ce.prsttnRefuseReasonCode')" required>
+                <h-select v-model="refuseForm.payRefuseCode" placeholder="" @on-change="payRefuseCodeChange">
+                  <h-option v-for="item in payRefuseCodeList" :value="item.key" :key="item.key">{{
+                      item.value
+                    }}
+                  </h-option>
+                </h-select>
+              </h-form-item>
+              <h-form-item prop="payRefuseReason" :label="$t('m.i.be.prsttnRefuseReason')" class="h-form-height-auto"
+                           :required="!otherRefuse">
+                <h-input v-model="refuseForm.payRefuseReason" placeholder="" type="textarea" :rows="4"
+                         :canResize="false" :maxlength="60" :readonly="otherRefuse" :lengthByByte="false"></h-input>
+              </h-form-item>
+            </h-form>
+          </div>
+          <div slot="footer">
+            <div slot="footer">
+              <h-button type="ghost" @click="refuseWinClose">{{ $t("m.i.common.close") }}</h-button>
+              <h-button type="primary" v-if="submitFlag" disabled>{{ $t("m.i.common.submiting") }}</h-button>
+              <h-button type="primary" v-else @click="refuseWinSubmit()">{{ $t("m.i.common.confirm") }}</h-button>
+            </div>
+          </div>
+        </h-msg-box>
+
+        <!-- 票面 -->
+        <bill-info-main @billInfoWinClose="billInfoWinClose" :showBillInfoWin="showBillInfoWin"
+                        :billId="this.billId" :billNo="this.billNo" :billRangeEnd="this.billRangeEnd"
+                        :billRangeStart="this.billRangeStart"></bill-info-main>
+
+      </h-col>
+    </h-row>
+    <!--<show-license-branch :showBranchWin="brchNoWin" title="机构查询" @brchNoChange="brchNoChange" :authPath="authPath"
+                         @showBranchWinClose="brchNoWin = false" :ifcheck="true" :checkStrictly="true"></show-license-branch>-->
+  </div>
+</template>
+
+<script>
+import {
+  post,
+  formatBillRange,
+  getDictListByGroups,
+  getDictValueFromMap,
+  formatNumber,
+} from "@/api/bizApi/commonUtil";
+
+export default {
+  name: "guarntrPaymentSignMain",
+  components: {
+    // ShowLicenseBranch: () => import(/* webpackChunkName: "sm/auth/branch/showLicenseBranch" */`@/views/bizViews/sm/auth/branch/showLicenseBranch`),
+
+  },
+  data() {
+    return {
+      // brchNoWin:false,
+      licenseFlag: false,
+      authPath: this.$route.path,
+      submitFlag: false,
+      settlementMarkCodeList: [],
+
+      showBillInfoWin: false,
+      billId: "",
+      billNo: "",
+      formItem: {
+        prsttnName: '',
+        prsttnAcctNo: '',
+        otherBankAcptMark: '',
+        billNoLike: '',
+        minRemitDt: "",
+        maxRemitDt: "",
+        minDueDt: "",
+        maxDueDt: "",
+        billOrigin: "",
+        minBillRangeStart: "",
+        maxBillRangeEnd: "",
+        inOutFlag: "2"
+      },
+      formItemRemitDt: "",
+      formItemDueDt: "",
+      columns: [
+        {
+          type: "selection",
+          hiddenCol: false,
+          align: "center",
+          width: 60
+        },
+        {
+          type: 'index',
+          key: 'numOrder',
+          title: this.$t("m.i.common.index"),
+          width: 60,
+          align: 'center',
+          hiddenCol: false,
+        },
+        {
+          title: this.$t("m.i.billInfo.billOrigin"),   //票据来源
+          key: "billOrigin",
+          hiddenCol: false,
+          render: (h, params) => {
+            let dictValue = this.getDictValueFromMap(this.dictMap, "BillOrigin", params.row.billOrigin);
+            return h("span", {
+              domProps: {
+                title: dictValue
+              }
+            }, dictValue);
+          }
+        },
+        {
+          title: this.$t('m.i.billInfo.billPackageNo'), //票据（包）号码
+          key: "billNo",
+          ellipsis: false,
+          hiddenCol: false,
+          sortable: true,
+          render: (h, params) => {
+            let type = "";
+            if (!!params.row.billId) {
+              type = "billId";
+            } else {
+              type = "billNo";
+            }
+            return h("a", {
+              on: {
+                click: () => {
+                  this.showBillInfo(params.row, type);
+                }
+              }
+            }, params.row.billNo);
+          }
+        },
+        {
+          title: this.$t("m.i.billInfo.billRange"),   //子票区间
+          key: "billRange",
+          hiddenCol: false,
+          render: (h, params) => {
+            let billOrigin = params.row.billOrigin;
+            let billRangeStart = params.row.billRangeStart;
+            let billRangeEnd = params.row.billRangeEnd;
+            return h("span", formatBillRange(billOrigin, billRangeStart, billRangeEnd))
+          }
+        },
+        {
+          title: this.$t("m.i.ce.otherBankAcptMark"),
+          key: 'otherBankAcptMark',
+          hiddenCol: false,
+          render: (h, params) => {
+            let dictValue = getDictValueFromMap(this.dictMap, "Yon", params.row.otherBankAcptMark);
+            return h("span", {
+              domProps: {
+                title: dictValue
+              }
+            }, dictValue);
+          },
+        },
+        {
+          title: this.$t("m.i.billInfo.flowStatus"),
+          key: 'flowStatusName',
+          hiddenCol: false,
+        },
+        {
+          title: this.$t("m.i.ce.clearMark"),
+          key: 'clearMark',
+          hiddenCol: false,
+          render: (h, params) => {
+            let dictValue = getDictValueFromMap(this.dictMap, "SettleType", params.row.clearMark);
+            return h("span", {
+              domProps: {
+                title: dictValue
+              }
+            }, dictValue);
+          }
+        },
+        {
+          title: this.$t("m.i.billInfo.acptProtocalNo"),
+          key: 'acptProtocalNo',
+          hiddenCol: false,
+        },
+        {
+          title: this.$t("m.i.ce.promNoteNo"),
+          key: 'promNoteNo',
+          hiddenCol: false,
+        },
+        {
+          title: this.$t("m.i.billInfo.billType"),
+          key: 'billType',
+          hiddenCol: false,
+          render: (h, params) => {
+            let list = getDictValueFromMap(this.dictMap, "DraftTypeCode", params.row.billType);
+            return h("span",
+              {
+                domProps: {
+                  title: list
+                }
+              }, list);
+          }
+        },
+        {
+          title: this.$t("m.i.billInfo.billPackageMoney"),
+          key: 'billMoney',
+          hiddenCol: false,
+          sortable: true,
+          render: (h, params) => {
+            let billMoney = formatNumber(params.row.billMoney, 2, ',');
+            return h("span", {
+              domProps: {
+                title: billMoney
+              }
+            }, billMoney);
+          }
+        },
+        {
+          title: this.$t("m.i.billInfo.pyeeName"),
+          key: 'pyeeName',
+          sortable: true,
+          hiddenCol: false,
+        },
+        {
+          title: this.$t("m.i.billInfo.drwrName"),
+          key: 'drwrName',
+          sortable: true,
+          hiddenCol: false,
+        },
+        {
+          title: this.$t("m.i.billInfo.drwrAcctNo"),
+          key: 'drwrAcctNo',
+          hiddenCol: false,
+        },
+        {
+          title: this.$t("m.i.billInfo.remitDt"),
+          key: 'remitDt',
+          hiddenCol: false,
+          sortable: true,
+          render: (h, params) => {
+            if (params.row.remitDt == null || params.row.remitDt === "") {
+              return "";
+            }
+            let date = this.$moment(params.row.remitDt, "YYYY-MM-DD").format("YYYY-MM-DD");
+            return h("span", date);
+          }
+        },
+        {
+          title: this.$t("m.i.billInfo.dueDt"),
+          key: 'dueDt',
+          hiddenCol: false,
+          sortable: true,
+          render: (h, params) => {
+            if (params.row.dueDt == null || params.row.dueDt === "") {
+              return "";
+            }
+            let date = this.$moment(params.row.dueDt, "YYYY-MM-DD").format("YYYY-MM-DD");
+            return h("span", date);
+          }
+        },
+        {
+          title: this.$t("m.i.billInfo.prsttnAcctNo"),
+          key: 'prsttnAcctNo',
+          hiddenCol: false,
+        },
+        {
+          title: this.$t("m.i.billInfo.prsttnName"),
+          key: 'prsttnName',
+          hiddenCol: false,
+        },
+        {
+          title: this.$t("m.i.billInfo.prsttnBankNo"),
+          key: 'prsttnBankNo',
+          hiddenCol: false,
+        },
+        {
+          title: this.$t("m.i.billInfo.prsttnBankName"),
+          key: 'prsttnBankName',
+          hiddenCol: false,
+        },
+      ],
+      YonList: [],
+      currentSelectList: [],
+      showCustAcctNoWin: false,
+      showCustMessageWin: false,
+      signConfirmWin: false,
+      dictMap: new Map(),
+      ifShowMore: false,
+      billRangeStart: "",
+      billRangeEnd: "",
+      billOriginList: [],
+      otherRefuse: true,
+      refuseWin: false,
+      refuseForm: {
+        ids: '',
+        payRefuseCode: '',
+        payRefuseReason: '',
+      },
+      payRefuseCodeList: [],
+    }
+  },
+  mounted() {
+    getDictListByGroups("DishonorCode,DraftTypeCode,Yon,SettlementMarkCode,BillOrigin,SettleType").then(res => {
+      this.YonList = res.get("Yon");
+      this.settlementMarkCodeList = res.get("SettlementMarkCode");
+      this.dictMap = res.get("map");
+      this.billOriginList = res.get("BillOrigin");
+      this.payRefuseCodeList = res.get("DishonorCode");
+    });
+  },
+  created() {
+    this.buttonAuthShow();
+  },
+  methods: {
+    billInfoWinClose() {
+      this.showBillInfoWin = false;
+    },
+    showBillInfo(row, type) {
+      this.billId = "";
+      this.billNo = "";
+      this.billRangeStart = "";
+      this.billRangeEnd = "";
+      if (type === "billId") {
+        this.billId = row.billId;
+      } else {
+        this.billNo = row.billNo;
+      }
+      this.billRangeStart = row.billRangeStart;
+      this.billRangeEnd = row.billRangeEnd;
+      this.showBillInfoWin = true;
+    },
+    handleRemitDtChange(arr) {
+      if (arr && arr.length == 2) {
+        this.formItem.minRemitDt = arr[0].replace(/-/g, "");
+        this.formItem.maxRemitDt = arr[1].replace(/-/g, "");
+        this.formItemRemitDt = [arr[0], arr[1]];
+      } else {
+        this.formItem.minRemitDt = "";
+        this.formItem.maxRemitDt = "";
+        this.formItemRemitDt = [];
+      }
+    },
+    handleDueDtChange(arr) {
+      if (arr && arr.length == 2) {
+        this.formItem.minDueDt = arr[0].replace(/-/g, "");
+        this.formItem.maxDueDt = arr[1].replace(/-/g, "");
+        this.formItemDueDt = [arr[0], arr[1]];
+      } else {
+        this.formItem.minDueDt = "";
+        this.formItem.maxDueDt = "";
+        this.formItemDueDt = [];
+      }
+
+    },
+    //表单查询
+    handleSearch() {
+      this.$refs.datagrid.selects = [];
+      this.$nextTick(() => {
+        this.$refs.datagrid.dataChange(1);
+      })
+    },
+    //重置表单查询结果
+    resetSearch() {
+      this.$refs.formItem.resetFields();
+      this.formItem.minBillRangeStart = "";
+      this.formItem.maxBillRangeEnd = "";
+      this.formItem.minRemitDt = "";
+      this.formItem.maxRemitDt = "";
+      this.formItem.minDueDt = "";
+      this.formItem.maxDueDt = "";
+      this.formItemRemitDt = "";
+      this.formItemDueDt = "";
+    },
+    //付款签收
+    paymentSign() {
+      if (this.$refs.datagrid.selects.length === 0) {
+        this.$msgTip.info(this, {info: this.$t("m.i.common.chooseAtLeastOneRecord")});
+        return;
+      }
+      let list = this.$refs.datagrid.selects;
+      this.$hMsgBox.confirm({
+        title: this.$t("m.i.common.confirm"),
+        content: "确定应答同意吗？",
+        onOk: () => {
+          this.paymentSignSubmit();
+        }
+      });
+    },
+    paymentSignSubmit() {
+      let ids = "";
+      let list = this.$refs.datagrid.selects;
+      for (let i = 0; i < list.length; i++) {
+        ids += list[i].id;
+        if (i < list.length - 1) {
+          ids += ",";
+        }
+      }
+      post({ids: ids}, "/banks/szbank/ce/acpt/innerBillPayment/guarntrPaymentSignMain/func_guarntrPaymentDueSign").then(res => {
+        if (res) {
+          let msg = res.data.retMsg;
+          let retCode = res.data.retCode;
+          if (retCode === "000000") {
+            this.$msgTip.success(this);
+          } else {
+            this.$msgTip.error(this, {info: msg});
+          }
+          this.$refs.datagrid.dataChange(1);
+          this.$refs.datagrid.selects = [];
+          this.$refs.datagrid.selectIds = [];
+        }
+      }).catch(error => {
+        this.$msgTip.error(this, {info: this.$t("m.i.common.netError") + error});
+      });
+    },
+
+    //退回
+    paymentRefuse() {
+      if (this.$refs.datagrid.selects.length === 0) {
+        this.$msgTip.info(this, {info: this.$t("m.i.common.chooseAtLeastOneRecord")});
+        return;
+      }
+      this.refuseWin = true;
+    },
+
+    //拒付登记弹窗确定
+    refuseWinSubmit() {
+      let ids = "";
+      let list = this.$refs.datagrid.selects;
+      for (let i = 0; i < list.length; i++) {
+        ids += list[i].id;
+        if (i < list.length - 1) {
+          ids += ",";
+        }
+      }
+      this.refuseForm.ids = ids;
+      this.$refs["refuseForm"].validate(valid => {
+        if (valid) {
+          this.submitFlag = true;
+          post(this.refuseForm, "/banks/szbank/ce/acpt/innerBillPayment/guarntrPaymentSignMain/func_submitGuarntrPaymentDueRefuseRgst").then(res => {
+            this.submitFlag = false;
+            if (res) {
+              let msg = res.data.retMsg;
+              let retCode = res.data.retCode;
+              if (retCode === "000000") {
+                this.$msgTip.success(this);
+                this.refuseWinClose();
+              } else {
+                this.$msgTip.error(this, {info: msg});
+              }
+              this.$refs.datagrid.dataChange(1);
+              this.$refs.datagrid.selects = [];
+              this.$refs.datagrid.selectIds = [];
+            }
+          }).catch(error => {
+            this.$msgTip.error(this, {info: this.$t("m.i.common.netError") + error});
+          });
+        }
+      })
+    },
+    //拒付登记弹窗关闭
+    refuseWinClose() {
+      this.refuseWin = false;
+      this.$refs.refuseForm.resetFields();
+    },
+    payRefuseCodeChange() {
+      if (this.refuseForm.payRefuseCode == 'CP06') {
+        this.otherRefuse = false;
+      } else {
+        this.refuseForm.payRefuseReason = "";
+        this.otherRefuse = true;
+      }
+    },
+  },
+};
+</script>
+
+<style scoped>
+
+</style>

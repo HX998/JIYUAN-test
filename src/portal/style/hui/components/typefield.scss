@@ -1,0 +1,124 @@
+$typefield-prefix-cls: "#{$css-prefix}typefield" ;
+.#{$typefield-prefix-cls}{
+  display: block;
+  position: relative;
+  height: $form-component-height;
+  width: 100%;
+  input{
+    width: 100%;
+    height: $form-component-height;
+    padding-left:12px;
+    padding-right:12px;
+    outline: 0;
+    font-size: 12px;
+    // line-height: 1.42857143;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: border-color ease-in-out $transition-time, -webkit-box-shadow ease-in-out $transition-time;
+    -o-transition: border-color ease-in-out $transition-time, box-shadow ease-in-out $transition-time;
+    transition: border-color ease-in-out $transition-time, box-shadow ease-in-out $transition-time;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid $border-color-base;
+    border-radius: $border-radius-small;
+    @include placeholder();
+  }
+  input[disabled]:focus, 
+  input[readonly]:focus {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    border: 1px solid $border-color-base;
+  }
+  input:focus {
+    outline: 0;
+    border-color: #298DFF;
+  }
+  &-disabled{
+    input[disabled], {
+      @include disabled();
+    }
+  }
+  &-readonly{
+    input[readonly] {
+      // background: $input-readonly-bg;
+      @include readonly();
+    }
+  }
+  &-tip {
+    position: absolute;
+    display: block;
+    font-family: 'Microsoft YaHei';
+    text-align: left;
+    line-height: 22px;
+    top: 34px;
+    left: 0;
+    padding: 6px 12px 8px 12px;
+    z-index: $zindex-tooltip ;
+    font-size: 12px;
+    border-radius: $border-radius-small;
+    border:1px solid #cfcfcf;
+    background: #fff;
+    color: #495060;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  &-left{
+    text-align:left;
+  }
+  &-center{
+    text-align:center;
+  }
+  &-right{
+    text-align:right;
+  }
+}
+
+.#{$typefield-prefix-cls}-group{
+  @include input-group("#{$typefield-prefix-cls}");
+  input{
+    border-radius: 0;
+  }
+  .h-typefield-left {
+      border-bottom-left-radius: $border-radius-small;
+      border-top-left-radius: $border-radius-small;
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+  }
+  .h-select-selection {
+      margin: 0;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+  }
+}
+
+.#{$form-item-prefix-cls}-error{
+  .#{$typefield-prefix-cls}{
+      input{
+        border: 1px solid $error-color;
+      }
+  }
+  .h-typefield-group{
+    input{
+      border-right-width: 0;
+    }
+  }
+}
+
+.#{$form-item-prefix-cls}-changed{
+  .#{$typefield-prefix-cls}{
+      input{
+        color:$changed-color;
+      }
+  }
+}
+
+.#{$editgird-prefix-cls}-cell-error{
+    .#{$typefield-prefix-cls}{
+        input{
+            border: 1px solid $error-color;
+        }
+    }
+    .#{$input-prefix-cls}-group{
+      @include input-group-error();
+    }
+}

@@ -1,0 +1,110 @@
+$fastdate-prefix-cls: "#{$css-prefix}fast-date";
+
+.#{$fastdate-prefix-cls} {
+  &-wrapper{
+    width:100%;
+    display: inline-block;
+    vertical-align: middle
+  }
+  &-inner{
+    position: relative;
+    width:100%;
+    // height: $input-height-base;
+    div{
+      height: $input-height-base;
+      line-height:$input-height-base;
+      float:left;
+      span{
+        display:inner-block;
+        input{
+          border:none;
+          padding: 0 2px;
+          width:18px;
+          height:$input-height-base;
+          outline:none;
+          background:transparent;
+          text-align:right;
+          @include placeholder();
+        }
+        .#{$fastdate-prefix-cls}-algin-left{
+          text-align:left;
+        }
+      }
+      span.left-icon{
+        float:right;
+      }
+    }
+    &-single{
+      .#{$fastdate-prefix-cls}-single{
+        width:100%;
+      }
+    }
+    &-range{
+      .#{$fastdate-prefix-cls}-single{
+        width:calc(50% - 10px);
+      }
+      .#{$fastdate-prefix-cls}-inner-split{
+        width:20px;
+        text-align:center;
+      }
+      .#{$fastdate-prefix-cls}-range{
+        width:calc(50% - 10px);
+      }
+    }
+
+  }
+  &-disabled{
+    @include disabled();
+  }
+  &-readonly{
+    @include readonly();
+  }
+  &-edit{
+    padding: 0 8px;
+    border-radius: 4px;
+    border:1px solid $border-color-base;
+  }
+  &-activity{
+    font-size:16px;
+  }
+    
+}
+.#{$form-item-prefix-cls}-error{
+  .#{$fastdate-prefix-cls}{
+    &-edit{
+      border: 1px solid $error-color;
+    }
+    &-activity{
+      color: $error-color;
+    }
+  }
+}
+.#{$form-item-prefix-cls}-changed{
+  .#{$fastdate-prefix-cls}{
+    input{
+      @include changed();
+    }
+    .left-icon,
+    &-activity{
+      color: $input-color;
+    }
+  }
+}
+.#{$form-item-prefix-cls}-error{
+  .#{$fastdate-prefix-cls}{
+    &-edit{
+      border: 1px solid $error-color;
+    }
+    .left-icon,
+    &-activity{
+      color: $error-color;
+    }
+  }
+}
+.#{$editgird-prefix-cls}-cell-error{
+  .#{$fastdate-prefix-cls}{
+    &-edit{
+      border: 1px solid $error-color;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+.input-boder-0 input{
+    border:  0;
+  }
+  .input-boder-0 textarea{
+    border:  0;
+  }
+  .input-boder-0 input[readonly] {
+    background-color: #ffffff;
+    color: #463e3e;
+}
+.login-form .verify-tip1>.verify-tip-top {
+  color: $error-color;
+  padding: 0 0 0 20px;
+  text-align: left;
+  background: transparent url("~@/assets/icon_warn_lit.png") no-repeat left center;
+}
+.theme-black .h-modal-wrap .h-modal-body .h-tree-search .h-tree-content .h-tree-self{
+  width : 100%;
+}
+.h-table-not-width td .h-table-cell>span[title]{
+  display: inline-block;
+    width: 100%;
+
+    padding-left: 15px;
+    margin-left: -15px;
+}

@@ -1,0 +1,376 @@
+a {
+  color: $link-color;
+  background: transparent;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+  transition: color $transition-time ease;
+
+  &:hover {
+    color: $link-hover-color;
+  }
+
+  &:active {
+    color: $link-active-color;
+  }
+
+  &:active,
+  &:hover {
+    outline: 0;
+    text-decoration: none;
+  }
+
+  &[disabled] {
+    color: #ccc;
+    cursor: $cursor-disabled;
+    pointer-events: none;
+  }
+}
+
+.h-modal-wrap {
+  //弹出框文本可选
+  -webkit-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto;
+}
+
+//login
+.app-login {
+  .login-wrapper {
+    .login-body {
+      .login-type {
+        &-content {
+          &-pwd {
+            background: $background-color-select-hover url("~@/assets/pwd.png") no-repeat center center;
+            &:hover {
+              background: $primary-color url("~@/assets/pwd-w.png") no-repeat center center;
+            }
+          }
+
+          &-pwd.login-type-content-actived {
+            background: $primary-color url("~@/assets/pwd-w.png") no-repeat center center;
+          }
+
+          &-ft {
+            background: $background-color-select-hover url("~@/assets/ft.png") no-repeat center center;
+            &:hover {
+              background: $primary-color url("~@/assets/ft-w.png") no-repeat center center;
+            }
+          }
+
+          &-ft.login-type-content-actived {
+            background: $primary-color url("~@/assets/ft-w.png") no-repeat center center;
+          }
+
+          &-ph {
+            background: $background-color-select-hover url("~@/assets/phone.png") no-repeat center center;
+            &:hover {
+              background: $primary-color url("~@/assets/phone-w.png") no-repeat center center;
+            }
+          }
+
+          &-ph.login-type-content-actived {
+            background: $primary-color url("~@/assets/phone-w.png") no-repeat center center;
+          }
+        }
+      }
+    }
+  }
+}
+
+.app-login2 {
+  .login-wrapper {
+    .login-body {
+      .login-type {
+        &-content {
+          &-pwd {
+            background: $background-color-select-hover url("~@/assets/pwd.png") no-repeat center center;
+            &:hover {
+              background: $primary-color url("~@/assets/pwd-w.png") no-repeat center center;
+            }
+          }
+
+          &-pwd.login-type-content-actived {
+            background: $primary-color url("~@/assets/pwd-w.png") no-repeat center center;
+          }
+
+          &-ft {
+            background: $background-color-select-hover url("~@/assets/ft.png") no-repeat center center;
+            &:hover {
+              background: $primary-color url("~@/assets/ft-w.png") no-repeat center center;
+            }
+          }
+
+          &-ft.login-type-content-actived {
+            background: $primary-color url("~@/assets/ft-w.png") no-repeat center center;
+          }
+
+          &-ph {
+            background: $background-color-select-hover url("~@/assets/phone.png") no-repeat center center;
+            &:hover {
+              background: $primary-color url("~@/assets/phone-w.png") no-repeat center center;
+            }
+          }
+
+          &-ph.login-type-content-actived {
+            background: $primary-color url("~@/assets/phone-w.png") no-repeat center center;
+          }
+        }
+      }
+    }
+  }
+}
+
+// 首页
+.h-system-state-wrap {
+  .h-state-info {
+    .h-company {
+      .h-icon {
+        background: $background-color-select-hover;
+        color: $link-color;
+      }
+    }
+
+    .h-stste-list {
+      li {
+        span {
+          background: $link-color;
+        }
+      }
+    }
+  }
+
+  .h-stste-chart {
+    .h-stste-chart-title {
+      .h-stste-chart-btn-group {
+        em:hover, .active {
+          border-color: $link-color !important;
+          background: $link-color;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+.h-event-title {
+  .h-event-icon {
+    background: $background-color-select-hover;
+    color: $link-color;
+  }
+
+  .h-event-num {
+    span {
+      color: $link-color;
+    }
+  }
+
+  .h-event-refresh {
+    &:hover {
+      color: lighten($link-color, 10%);;
+    }
+
+    &.h-event-loading {
+      color: lighten($link-color, 10%);
+    }
+  }
+}
+
+.h-event-content {
+  ul {
+    li {
+      .h-event-remind .h-end-item:hover {
+        background: $background-color-select-hover;
+      }
+    }
+  }
+}
+
+.h-navbar-wrapper {
+  .tabs-view-container {
+    .tag-homepage {
+      a {
+        &.router-link-exact-active.router-link-active, &:hover {
+          //color: #197dcd;
+          color: $link-color;
+        }
+      }
+    }
+
+    .tags-scroll-left-btn {
+      &:hover {
+        //color: #238fdc;
+        color: $link-color;
+      }
+    }
+
+    .tags-scroll-right-btn {
+      &:hover {
+        color: $link-color;
+      }
+    }
+  }
+}
+
+//topbar
+.h-topbar-tool {
+  &-search {
+    .h-select-dropdown {
+      background: $topbar-bgcolor;
+
+      .h-select-item-focus, .h-select-item-selected, .h-select-item:hover {
+        background: $topbar-hover-bgcolor;
+      }
+
+      .h-select-block-option-item {
+        span {
+          color: #FFFFFF;
+        }
+      }
+      .h-select-block-option-item:hover {
+        background: #90C349;
+      }
+    }
+  }
+
+  .h-topbar-option-list {
+    .item {
+      .logout {
+        background: $topbar-bgcolor;
+      }
+
+      &:hover .item-tit {
+        background: $topbar-hover-bgcolor;
+
+        .number {
+          border: 2px solid $topbar-hover-bgcolor;
+        }
+      }
+
+      &:hover .logout {
+        background: $topbar-hover-bgcolor;
+      }
+
+      .item-option-box {
+        background: $topbar-bgcolor;
+
+        .header {
+          .btn-passwd {
+            background: $topbar-hover-bgcolor;
+          }
+
+          .btn-menu {
+            background: $topbar-hover-bgcolor;
+          }
+        }
+
+        .content {
+          .notice-list {
+            li {
+              &:hover {
+                background: darken($topbar-bgcolor, 10%);
+              }
+            }
+          }
+
+          .menu-list {
+            li {
+              &:hover {
+                color: lighten($topbar-bgcolor, 30%);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//tab切换
+.h-tabs-nav .h-tabs-tab:hover {
+  color: $link-color;
+}
+
+//sidebar
+.h-sidebar-wrapper {
+  .h-sidebar {
+    &-leftfixed {
+      background: $topbar-bgcolor;
+
+      &-item {
+        .h-sidebar-main {
+          background: $topbar-bgcolor;
+
+          .h-menu-item:hover {
+            background: $topbar-hover-bgcolor;
+          }
+        }
+
+        .h-menu-light.h-menu-vertical .h-menu-item-active:not(.h-menu-submenu) {
+          border-right: none;
+          background: $topbar-hover-bgcolor;
+        }
+
+        .h-menu-light.h-menu-vertical .h-menu-item-active:hover {
+          //background: #1d9483;
+          background: lighten($topbar-hover-bgcolor, 5%);
+        }
+      }
+    }
+  }
+}
+
+//tree
+.h-tree {
+  &-title {
+    &:hover {
+      background-color: lighten($primary-color, 100%);
+    }
+
+    &-selected, &-selected:hover {
+      background: $background-color-select-hover;
+    }
+  }
+}
+
+.menu-selected-list {
+  li {
+    &:hover {
+      background: $background-color-select-hover;
+    }
+  }
+}
+
+//table
+.h-table-stripe {
+  .h-table-body tr.h-table-row-hover td, .h-table-fixed-body tr.h-table-row-hover td, .h-table tr.h-table-row-hover td {
+    background-color: $background-color-select-hover;
+  }
+}
+
+.h-table-row-checked td, .h-table-row-highlight td,
+.h-table-stripe .h-table-body tr.h-table-row-checked:nth-child(2n) td,
+.h-table-stripe .h-table-body tr.h-table-row-highlight:nth-child(2n) td,
+.h-table-stripe .h-table-fixed-body tr.h-table-row-checked:nth-child(2n) td,
+.h-table-stripe .h-table-fixed-body tr.h-table-row-highlight:nth-child(2n) td,
+.h-table tr.h-table-row-checked.h-table-row-hover td,
+.h-table tr.h-table-row-highlight.h-table-row-hover td {
+  background-color: $table-td-hover-bg;
+}
+
+.window-operate {
+  .window-layer-win {
+    .window-layer-header {
+      background-color: $-msgBox-header-bg;
+      .window-layer-fn-btns {
+        i {
+          &:hover {
+            background: $-msgBox-header-bg;
+            color: $link-hover-color;
+          }
+        }
+      }
+    }
+  }
+}

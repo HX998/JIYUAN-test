@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>影像控件</title>
+  <style>
+    #btnShowReadMe, #btnShowExample {
+      margin-left: 10px;
+      height: 25px;
+      line-height: 20px;
+      vertical-align: middle;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .flex-container {
+      display: flex;
+      justify-content: center
+    }
+
+    .label {
+      line-height: 200px;
+      margin: 20px;
+    }
+  </style>
+
+  <!-- main.css   -->
+  <!--    <link rel="stylesheet" href="./css/sunscan-js.min.css">-->
+
+  <!--    preeDependencies -->
+
+  <script type="text/javascript" src="./plugins/pdf/pdf.min.js"></script>
+
+
+  <!--  build.js   -->
+
+  <link href="sunscan-js-main.min.css" rel="stylesheet">
+  <link href="sunscan-js-main.min.css" rel="stylesheet">
+</head>
+
+<body onload="init()">
+
+<h3>影像控件</h3>
+<script>
+
+</script>
+<div id="example" style="display: none">
+  <div class="flex-container">
+    <span class="label">tradeXml:</span> <textarea spellcheck="false" name="" id="tradeXml" cols="150"
+                                                   rows="17">
+<?xml version='1.0' encoding='GB2312'?>
+    <root>
+        <business appid='sunscan' tradecode='js' optiontype='2'
+                  tradedate='20160923' tradeuser='admin'
+                  objname='SUNSCAN' user='admin' pwd='111'
+                  objtoken='' isenc='0' organ=''
+                  ip='172.1.1.229' port='8023' dsname=''>
+            <node theme='GRKH' aa="111" bb="222" cc="333">
+                    <bsinf attr='BUSI_SERIAL_NO' disp='批次号' isquery='1'>202200606001</bsinf>
+              <!-- <bsinf attr='DDDDDDDDDDDDD' disp='但是反对法地方' isquery='1'>xddfdfdf</bsinf>-->
+                <bsinf attr='CREATEDATE' disp='业务开始日期' isquery='1'>20211118</bsinf>
+            </node>
+          <!-- <node theme='GRKH'>
+                      <bsinf attr='BUSI_SERIAL_NO' disp='批次号' isquery='1'>20220322003</bsinf>
+
+                  <bsinf attr='CREATEDATE' disp='业务开始日期' isquery='1'>20210727</bsinf>
+              </node>-->
+        </business>
+    </root>
+  </textarea>
+  </div>
+  <br>
+  <div class="flex-container">
+    <span class="label">treeXml:</span> <textarea spellcheck="false" name="treeXml" id="treeXml" cols="150" rows="18">
+<?xml version='1.0' encoding='GB2312'?>
+    <root>
+        <tree appid='sunscan' tradecode='js' theme='GRKH'>
+            <node name='IMAGE' desc='影像' isimage='2' barcode='' forms='' attri='0'
+                  isauth='1111' issuc='0'>
+                <node name='K001' desc='机构信用代码证' isimage='2' barcode=''
+                      forms='' attri='1' isauth='1111' issuc='0'/>
+                <node name='K002' desc='基本户开户许可证' isimage='2' barcode='001122'
+                      forms='' attri='1' isauth='1111' issuc='0'/>
+                <node name='K003' desc='外商投资批准证书' isimage='2' barcode=''
+                      forms='' attri='1' isauth='1111' issuc='1' sucnum='1'/>
+               <node name='OTHER' desc='未分类节点' isimage='2' barcode='' forms='' attri='1'
+                     isauth='1111' issuc='0' formdelete="1"/>
+                <node name='K004' desc='营业执照' isimage='2' barcode=''
+                      forms='' attri='1' isauth='1111' issuc='0'/>
+            </node>
+        </tree>
+    </root>
+  </textarea>
+  </div>
+  <br>
+  <div class="flex-container">
+    <span class="label">TransXML:</span> <textarea spellcheck="false" name="" id="commTransXML" cols="150" rows="12">
+<?xml version='1.0' encoding='GB2312' ?>
+    <root>
+    <head>
+        <transcode>td0037</transcode>
+    </head>
+    <body>
+        <param>111111111111111111111111111111111111111111111111111</param>
+        <param>1111111111111111111111111111111111111111</param>
+        <param>111111111</param>
+        <param>111111111</param>
+        <param>111111111</param>
+        <param>111111111</param>
+    </body>
+</root>
+  </textarea>
+  </div>
+  <br>
+  <div class="flex-container">
+    <span class="label">td0010参数:</span> <textarea spellcheck="false" name="" id="paramXML" cols="150" rows="12">
+<?xml version='1.0' encoding='GB2312' ?>
+    <root>
+    <head>
+        <transcode>td0010</transcode>
+    </head>
+    <body>
+        <!--<param name="scanduplex" >1</param>-->
+        <!-- <param name="masternum" >1</param>
+         <param name="sonnum" >1</param>-->
+        <param name="rotatesave" >1</param>
+        <param name="isaddshowfirst" >0</param>
+        <param name="isqryshowfirst" >1</param>
+        <param name="shownails" >0</param>
+        <param name="showanno" >0</param>
+        <param name="marktodb" >1</param>
+        <param name="annoauth" >1000</param>
+        <param name="issourcename" >30</param>
+        <!--<param name="defaultfileform" >K004</param>-->
+        <param name='watermake' x='0' y='0' word='1' transparent='1' transval='900' imgpath='' notechar='北京银行' varr='0' angle='30' fontsize='128' fontbold='1' fonttype=''
+               notecolor='black' notecolor_r='' notecolor_g='' notecolor_b='' backcolor=''
+               backcolor_r='' backcolor_g='' backcolor_b='' add='1' qry='1'>1 </param>
+
+    </body>
+</root>
+  </textarea>
+  </div>
+  <div class="flex-container">
+    <span class="label">td0003参数:</span> <textarea spellcheck="false" name="" id="submitXML" cols="150" rows="12">
+<?xml version='1.0' encoding='GB2312' ?>
+    <root>
+    <head>
+        <transcode>td0003</transcode>
+    </head>
+    <body>
+        <param>0</param>
+    </body>
+</root>
+  </textarea>
+  </div>
+  <br>
+
+  <div class="flex-container">
+    <span class="label">options:</span>
+    <textarea name="options" id="options" cols="150" rows="10">
+    {
+        element: document.getElementById('view'),
+        host: 'ws://127.0.0.1:17000/ws',
+        width: '1300px',
+        height: '600px'
+    }
+</textarea>
+  </div>
+  <!--    <div class="flex-container">-->
+  <!--        <span class="label">options:</span>-->
+  <!--        <textarea name="options" id="options1" cols="150" rows="10">-->
+  <!--    {-->
+  <!--        element: document.getElementById('view1'),-->
+  <!--        host: 'ws://127.0.0.1:17000/ws',-->
+  <!--        width: '1200px',-->
+  <!--        height: '500px'-->
+  <!--    }-->
+  <!--</textarea>-->
+  <!--    </div>-->
+  <br>
+
+  <!--    host: <input id="host" type="text" value="ws://127.0.0.1:17000/ws">-->
+
+  <!--    <br>-->
+  <!--    width: <input id="width" type="text" value="1200px">-->
+
+  <!--    <br>-->
+  <!--    heigth: <input id="heigth" type="text" value="500px">-->
+
+
+  <input id="config1" type="hidden" value="&lt;?xml version=&#x27;1.0&#x27; encoding=&#x27;GB2312&#x27;?&gt;
+&lt;root&gt;
+    &lt;head&gt;
+        &lt;transcode&gt;td0010&lt;/transcode&gt;
+    &lt;/head&gt;
+    &lt;body&gt;">
+
+  <input id="config2" type="hidden" value="&lt;/body&gt;
+&lt;/root&gt;">
+
+
+</div>
+<br>
+<div id="view"></div>
+<br>
+<!--<div id="view1"></div>-->
+<br>
+
+<!--<button onclick="loadSunScan()">加载</button>-->
+<!--&lt;!&ndash;<button onclick="setToolBar()">设置工具栏</button>&ndash;&gt;-->
+<!--<button onclick="add()">新增</button>-->
+<button onclick="add2()">新增</button>
+<button onclick="modify()">修改</button>
+<button onclick="query()">查询</button>
+<button onclick="update()">补扫</button>
+<!--<button onclick="query1()">查询1</button>-->
+<button id="commocx" onclick="commocx(event)">发送交易接口</button>
+<button id="setParam" onclick="commocx(event)">设置控件参数</button>
+<button id="submit" onclick="submit()">提交</button>
+
+<br><br>
+
+
+<script>
+  var paramData;
+  window.sessionStorage.setItem("sunscanFlag","1");
+  this.window.addEventListener('message',function (event) {
+    paramData = event.data;
+  })
+  function init(){
+    add2();
+  }
+  function JScallbackProc(paramXml) {
+    console.log("JScallbackProc:" + paramXml);
+    // alert(paramXml);
+
+
+    return paramXml;
+  }
+
+
+  function commocx(e) {
+    event = e || event;
+    var TransXML;
+    switch (event.target && event.target.id || event.srcElement && event.srcElement.id) {
+      case 'commocx':
+        TransXML = document.getElementById('commTransXML').value;
+        break;
+      case 'setParam':
+        TransXML = document.getElementById('paramXML').value;
+        break;
+    }
+
+    createSunScan.then(function (SunScan) {
+      SunScan.CommOcxFunction(TransXML).then(function (data) {
+        // console.dir("123:"+data);
+        if (data.xml) {
+          console.log(data.xml);
+          alert(data.xml);
+
+        }
+      })
+    });
+  }
+
+  function submit() {
+    var submitXML = document.getElementById('submitXML').value;
+
+    createSunScan.then(function (SunScan) {
+      SunScan.CommOcxFunction(submitXML).then(function (data) {
+        if (data.xml) {
+          console.log(data.xml);
+          let json = xmlObj2json(data.xml);
+          window.parent.postMessage({"respinfo": json.root.head.respinfo,"respcode": json.root.head.respcode,"flowGloNo": paramData.flowNo,"workBusiDate":paramData.workdate},"*");
+        }
+      })
+    });
+  }
+
+
+  // function addConfigItem() {
+  //     var n = document.createElement('div');
+  //     var t = '参数名：<input type="text" name="configName" value="">\n' +
+  //         '    参数值：<input type="text" name="configValue" value=""> <br>';
+  //     n.innerHTML = t;
+  //     document.getElementById('td0010').appendChild(n);
+  // }
+  //
+  function loadSunScan() {
+    var SunScanObj = new SunScanJS(eval('(' + document.getElementById('options').value + ')'));
+    window.createSunScan = SunScanObj.CreateSunScan('sunscan', 'js');
+  }
+
+
+  function add2() {
+    try {
+      var SunScan = new SunScanJS(eval('(' + document.getElementById('options').value + ')'));
+      var s = SunScan.CreateSunScan('sunscan', 'js');
+      window.createSunScan = s;
+      s.then(function () {
+        // 若在调用ShowSunScan之前，调用td0010设置参数，则要等CommOcxFunction调用成功之后再调用ShowSunScan
+        var tradeXml = document.getElementById('tradeXml').value;
+        tradeXml = tradeXml.replace("optiontype='2'", "optiontype='0'");
+        tradeXml = tradeXml.replace("202200606001", paramData.flowNo);
+        tradeXml = tradeXml.replace("20211118", paramData.workdate);
+        console.log(tradeXml);
+        var treeXml = document.getElementById('treeXml').value;
+        SunScan.ShowSunScan(tradeXml, treeXml).then(function (resp) {
+          SunScan.CommOcxFunction(document.getElementById('commTransXML').value);
+        })
+        // });
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+
+  // function f() {
+  //   var SunScan = new SunScanJS(eval('(' + document.getElementById('options').value + ')'));
+  //
+  //   var s = SunScan.CreateSunScan('sunscan', 'js');
+  //   s.then(function () {
+  //     var tradeXml = document.getElementById('tradeXml').value;
+  //     tradeXml = tradeXml.replace("optiontype='2'", "optiontype='0'");
+  //     var treeXml = document.getElementById('treeXml').value;
+  //     SunScan.ShowSunScan(tradeXml, treeXml).then(function (resp) {
+  //       SunScan.CommOcxFunction(document.getElementById('config1').value + '<param name="thumbwidth">200</param><param name="thumbheight">200</param>' + document.getElementById('config2').value);
+  //       // SunScan.CommOcxFunction(document.getElementById('paramXML').value);
+  //       SunScan.CommOcxFunction(document.getElementById('commTransXML').value);
+  //     })
+  //
+  //   });
+  // }
+
+
+  function modify() {
+    try {
+      var SunScan = new SunScanJS(eval('(' + document.getElementById('options').value + ')'));
+
+      var s = SunScan.CreateSunScan('sunscan', 'js');
+      window.createSunScan = s;
+      createSunScan.then(function (SunScan) {
+        var tradeXml = document.getElementById('tradeXml').value;
+        tradeXml = tradeXml.replace("optiontype='2'", "optiontype='1'");
+        var treeXml = document.getElementById('treeXml').value;
+        SunScan.ShowSunScan(tradeXml, treeXml).then(function () {
+          SunScan.CommOcxFunction(document.getElementById('commTransXML').value);
+        })
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  function update() {
+    try {
+      var SunScan = new SunScanJS(eval('(' + document.getElementById('options').value + ')'));
+
+      var s = SunScan.CreateSunScan('sunscan', 'js');
+      window.createSunScan = s;
+      createSunScan.then(function (SunScan) {
+        var tradeXml = document.getElementById('tradeXml').value;
+        tradeXml = tradeXml.replace("optiontype='2'", "optiontype='4'");
+        var treeXml = document.getElementById('treeXml').value;
+        SunScan.ShowSunScan(tradeXml, treeXml).then(function () {
+          SunScan.CommOcxFunction(document.getElementById('commTransXML').value);
+        })
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+
+  function query() {
+    try {
+      var SunScan = new SunScanJS(eval('(' + document.getElementById('options').value + ')'));
+
+      var s = SunScan.CreateSunScan('sunscan', 'js');
+      window.createSunScan = s;
+      s.then(function (data) {
+        var tradeXml = document.getElementById('tradeXml').value;
+        tradeXml = tradeXml.replace("optiontype='2'", "optiontype='2'");
+        var treeXml = document.getElementById('treeXml').value;
+        //var treeXml = SunScan.createTree1(tradeXml);
+        // var nowDate =new Date();
+        //console.log(nowDate.getTime()+"-------------");
+        // sleep(10000);
+        // console.log(nowDate.getTime()+"-------------");
+        SunScan.ShowSunScan(tradeXml, treeXml).then(function (resp) {
+          SunScan.CommOcxFunction(document.getElementById('paramXML').value);
+          SunScan.CommOcxFunction(document.getElementById('commTransXML').value);
+        })
+      })
+
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  /**
+   * xml字符串转换xml对象数据
+   * @param {Object} xmlStr
+   */
+  function xmlStr2XmlObj(xmlStr) {
+    var xmlObj = {};
+    if (document.all) {
+      var xmlDom = new ActiveXObject("Microsoft.XMLDOM");
+      xmlDom.loadXML(xmlStr);
+      xmlObj = xmlDom;
+    } else {
+      xmlObj = new DOMParser().parseFromString(xmlStr, "text/xml");
+    }
+    return xmlObj;
+  }
+
+  /**
+   * xml字符串转换json数据
+   * @param {Object} xml
+   */
+  function xmlObj2json(xml) {
+    var xmlObj = xmlStr2XmlObj(xml);
+    console.log(xmlObj);
+    var jsonObj = {};
+    if (xmlObj.childNodes.length > 0) {
+      jsonObj = xml2json(xmlObj);
+    }
+    return jsonObj;
+  }
+
+  /**
+   * xml转换json数据
+   * @param {Object} xml
+   */
+  function xml2json(xml) {
+    try {
+      var obj = {};
+      if (xml.children.length > 0) {
+        for (var i = 0; i < xml.children.length; i++) {
+          var item = xml.children.item(i);
+          var nodeName = item.nodeName;
+          if (typeof(obj[nodeName]) == "undefined") {
+            obj[nodeName] = xml2json(item);
+          } else {
+            if (typeof(obj[nodeName].push) == "undefined") {
+              var old = obj[nodeName];
+              obj[nodeName] = [];
+              obj[nodeName].push(old);
+            }
+            obj[nodeName].push(xml2json(item));
+          }
+        }
+      } else {
+        obj = xml.textContent;
+      }
+      return obj;
+    } catch (e) {
+      console.log(e.message);
+    }
+  }
+
+  // function supScan() {
+  //   try {
+  //     var SunScan = new SunScanJS(eval('(' + document.getElementById('options').value + ')'));
+  //
+  //     var s = SunScan.CreateSunScan('sunscan', 'js');
+  //     window.createSunScan = s;
+  //     s.then(function (data) {
+  //       var tradeXml = document.getElementById('tradeXml').value;
+  //       tradeXml = tradeXml.replace("optiontype='2'", "optiontype='4'");
+  //       var treeXml = document.getElementById('treeXml').value;
+  //       //var treeXml = SunScan.createTree1(tradeXml);
+  //       // var nowDate =new Date();
+  //       //console.log(nowDate.getTime()+"-------------");
+  //       // sleep(10000);
+  //       // console.log(nowDate.getTime()+"-------------");
+  //       SunScan.ShowSunScan(tradeXml, treeXml).then(function (resp) {
+  //         SunScan.CommOcxFunction(document.getElementById('paramXML').value);
+  //         SunScan.CommOcxFunction(document.getElementById('commTransXML').value);
+  //       })
+  //     })
+  //
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }
+
+
+  // function sleep(delay) {
+  //   var nowDate = new Date();
+  //   //for(var t= nowDate.getTime();nowDate.getTime()-t<=delay;);
+  //   var aa = nowDate.getTime() + delay;
+  //   while (true) {
+  //     var now = new Date();
+  //     if (now.getTime() > aa) {
+  //       return
+  //     }
+  //   }
+  // }
+
+  // function query1() {
+  //   try {
+  //     var SunScan = new SunScanJS(eval('(' + document.getElementById('options1').value + ')'));
+  //
+  //     var s = SunScan.CreateSunScan('sunscan', 'js');
+  //     window.createSunScan = s;
+  //     s.then(function (data) {
+  //       var tradeXml = document.getElementById('tradeXml').value;
+  //       tradeXml = tradeXml.replace("optiontype='2'", "optiontype='2'");
+  //       var treeXml = document.getElementById('treeXml').value;
+  //       SunScan.ShowSunScan(tradeXml, treeXml).then(function (resp) {
+  //         SunScan.CommOcxFunction(document.getElementById('commTransXML').value);
+  //       })
+  //     })
+  //
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }
+
+
+  // function testClick(i, all) {
+  //   console.log("点击批注" + i);
+  //   for (var j = 0; j < all; j++) {
+  //     var lianno = document.getElementById('SunScan20190930_' + 'li-anno' + j);
+  //     if (lianno != null) {
+  //       if (i != j) {
+  //         lianno.style.backgroundColor = '#fff';
+  //       } else {
+  //         lianno.style.backgroundColor = '#f00';
+  //       }
+  //     }
+  //   }
+  //   // var ul = document.querySelector("#" + 'SunScan20190930_' + 'img-ol-anno');
+  //   // var list = ul.querySelectorAll("li");
+  //   // list[i].remove();
+  //
+  // }
+
+
+</script>
+
+<script type="text/javascript" src="sunscan-js-main.min.js"></script>
+<script type="text/javascript" src="sunscan-js-main.min.js"></script>
+</body>
+</html>
+

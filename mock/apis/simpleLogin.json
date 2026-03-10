@@ -1,0 +1,55 @@
+{
+    "header": {},
+    "body": {
+        "procRetCode": "0",
+        "userLastLogon": "20220830184725",
+        "roleName": "总行系统管理员",
+        "session_userName": "111",
+        "itemList": [],
+        "menuList": [],
+        "userMenuList": [
+            {
+                "ITN_ID": "100000",
+                "ITN_PID": "",
+                "ITN_NAME": "首页",
+                "ITN_URL": "home",
+                "ITN_STT": "0",
+                "ITN_DESC": "首页",
+                "ITN_AUTH": "0",
+                "ITN_AUTHTYPE": "1",
+                "ITN_LEVEL": "1"
+            },
+            {
+                "ITN_ID": "100001",
+                "ITN_PID": "",
+                "ITN_NAME": "模块1",
+                "ITN_URL": "module1/test",
+                "ITN_STT": "0",
+                "ITN_DESC": "模块1",
+                "ITN_AUTH": "0",
+                "ITN_AUTHTYPE": "1",
+                "ITN_LEVEL": "1"
+            },
+            {
+                "ITN_ID": "100002",
+                "ITN_PID": "",
+                "ITN_NAME": "模块2",
+                "ITN_URL": "module2/test",
+                "ITN_STT": "0",
+                "ITN_DESC": "模块2",
+                "ITN_AUTH": "0",
+                "ITN_AUTHTYPE": "1",
+                "ITN_LEVEL": "1"
+            }
+        ],
+        "sessionId": "JPJOCVJKJBIMGQDDJTEUCIEVEMDGBBGL",
+        "session_userBranchId": "706660888",
+        "errorCode": "",
+        "errorMsg": "",
+        "isSuccess": "",
+        "userId": "zhuhaodong",
+        "returnCode": "0",
+        "returnMessage": ""
+    }
+  }
+  

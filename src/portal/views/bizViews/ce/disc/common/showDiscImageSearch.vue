@@ -1,0 +1,182 @@
+<template>
+  <!-- 影像信息界面 -->
+  <h-msg-box v-model="tempShowUploadImageWin" :mask-closable="false" @on-close="handleClose" :maximize="true" width="1000" class="h-form-table-layer" @on-maximize="onMaximize">
+    <p slot="header">
+      <span>{{$t("m.i.common.imgInfo")}}</span>
+    </p>
+    <!--数据展示表格-->
+    <h-datagrid
+      :columns="showUploadImageColumns"
+      :bindForm="formItem"
+      :auto-load="false"
+      highlight-row
+      :height="300"
+      :url="this.params.queryUrl"
+      ref="datagrid">
+      <div slot="toolbar">
+      </div>
+    </h-datagrid>
+    <div slot="footer">
+      <h-button type="ghost" @click="handleClose">{{$t("m.i.common.close")}}</h-button>
+    </div>
+
+    <!-- 查看影像弹出框-->
+    <h-msg-box :title="$t('m.i.common.showImg')" v-model="showImgWin" width="1000" :mask-closable="false" :footerHide="true" :z-index=1010 class="h-form-search-layer" top="10" :maximize="true" @on-close="showImageClose">
+      <img :src="this.viewUrl" width="100%"/>
+    </h-msg-box>
+  </h-msg-box>
+</template>
+
+<script>
+  import { getDictListByGroups, getDictValueFromMap } from "@/api/bizApi/commonUtil";
+
+  export default {
+    name: "showDiscImageSearch",
+    data() {
+      return {
+        formItem : {
+          imgType: "IM20",
+          listId: Number,
+          prodNo: ""
+        },
+        //查看影像
+        showImgWin : false,
+        viewUrl : "",
+        imgTypeList : [],
+        dictMap : new Map(),
+        showUploadImageColumns : [
+          {
+            title: this.$t("m.i.common.index"),
+            type: "index",
+            width: 60,
+            align: "center"
+          }, {
+            title: this.$t("m.i.ce.ImgFileName"),
+            key: "fileName",
+            hiddenCol: false
+          }, {
+           title: this.$t("m.i.ce.uploadDt"),
+            key: "uploadDt",
+            hiddenCol: false,
+            render: (h, params) => {
+              if (params.row.uploadDt == null || params.row.uploadDt === "") {
+                return "";
+              }
+              let uploadDt = this.$moment(params.row.uploadDt, "YYYYMMDD").format("YYYY-MM-DD");
+              return h("span", uploadDt);
+            }
+          }, {
+            title: this.$t("m.i.common.operTellerNo"),
+            key: "operTellerNo",
+            hiddenCol: false
+          }, {
+            title: this.$t('m.i.common.status'),
+            key: "applStatus",
+            hiddenCol: false,
+            render: (h, params) => {
+              return h("span", getDictValueFromMap(this.dictMap, "ImgStatus", params.row.applStatus));
+            }
+          }, {
+           title: this.$t("m.i.common.showImg"),
+            key: "showImage",
+            hiddenCol: false,
+            render: (h, params) => {
+              return h("div", [
+                h("a", {
+                  props: {
+                    type: "primary",
+                    size: "small"
+                  },
+                  style: {
+                    marginRight: "5px"
+                  },
+                  on: {
+                    click: () => {
+                      this.showImage(params.row.attachId);
+                    }
+                  }
+                }, "查看")
+              ]);
+            }
+          }
+        ],
+      };
+    },
+    mounted() {
+    },
+    props: {
+      showUploadImageWin: {
+        type: Boolean,
+        default() {
+          return false;
+        }
+      },
+      params: Object
+    },
+    watch: {
+      showUploadImageWin(val) {
+        if (val === true) {
+          this.getDictInfo();
+          this.$nextTick(() => {
+            this.formSearch();
+          });
+        }
+      }
+    },
+    computed: {
+      tempShowUploadImageWin: {
+        get() {
+          return this.showUploadImageWin;
+        },
+        set() {
+        }
+      }
+    },
+    methods: {
+      getDictInfo() {
+        getDictListByGroups("ImgType,ImgStatus").then(res => {
+          this.imgTypeList = res.get("ImgType");
+          this.dictMap = res.get("map");
+        });
+      },
+      onMaximize() {
+        setTimeout(() => {
+          this.$refs.datagrid.$refs.gridContent.handleResize();
+        }, 100);
+      },
+      //查看影像
+      showImage(id) {
+        this.viewUrl = this.params.viewUrl + "?id=" + id;
+        this.$loadingbox.open({
+          title: "获取图像信息中，请稍后..."
+        });
+        setTimeout(() => {
+          this.$loadingbox.close();
+          this.showImgWin = true;
+        }, 1000);
+      },
+      //查看影像关闭
+      showImageClose() {
+        this.showImgWin = false;
+        this.viewUrl = "";
+      },
+      //查询
+      formSearch() {
+        this.formItem.listId = this.params.listId;
+        this.formItem.prodNo = this.params.prodNo;
+        this.formItem.imgType = this.params.imgType;
+        this.currentSelectRow = [];
+        this.$refs.datagrid.dataChange(1);
+      },
+      handleClose() {
+        this.$refs.datagrid.tData = [];
+        this.$refs.datagrid.$refs.gridPage.clearElevator();
+        this.$emit("uploadImageWinClose", "");
+      }
+    }
+  };
+</script>
+
+<style scoped>
+
+</style>

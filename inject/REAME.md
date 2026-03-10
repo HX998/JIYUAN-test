@@ -1,0 +1,2 @@
+# inject
+inject下面存放的_variables.scss文件，他会在vue.config.js中通过style-resources-loader注入到全局作为scss编辑时的变量被使用

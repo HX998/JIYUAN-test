@@ -1,0 +1,198 @@
+
+ .theme-black .h-modal-wrap {
+  //弹出框文本可选
+  -webkit-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto;
+  .h-modal-header {
+    span {
+      font-size: 14px;
+      color: #ffffff;
+      // font-weight: 700;
+    }
+  }
+  .h-modal-body {
+    padding: 10px 16px;
+    .h-form {
+      .h-input-wrapper {
+          height: 31px;
+      }
+    }
+    .verify-tip > .verify-tip-inner{
+      max-width:400px;
+    }
+    .h-modal-confirm .h-modal-confirm-head .h-modal-confirm-head-icon{
+      top: -3px;
+      left: 15px;
+    }
+    .h-modal-confirm-head .h-modal-confirm-head-icon{
+      top: -3px;
+      left: 15px;
+    }
+    //顶部按钮公共样式
+    .no-label .h-form-item-content{
+      margin-left: 0 !important;
+      padding-left: 20px;
+      line-height: 32px;
+    }
+    //弹出框模式下公共toolbar样式
+    .h-datagrid-toolbar {
+      padding: 8px 0px;
+    }
+    //弹出框若是搜索框的样式
+    .h-modal-dialog-body {
+      .h-modal-header-wrapper {
+        .h-modal-header-title {
+          position: absolute;
+          left: 28px;
+          top: 16px;
+          span {
+            font-size: 14px;
+            color: #ffffff;
+            // font-weight: 700;
+          }
+        }
+      }
+      .h-main-search {
+        padding:2px 15px 2px 0;
+        // margin-bottom: 20px;
+        border-bottom: 1px solid #f7f7f7;
+        background:#fff;
+        > h5 {
+          font-size:14px;
+          color:#333333;
+          padding:0 0 10px 15px;
+        }
+        .h-form-item {
+          // float: left;
+          // width: 218px;
+          > label {
+            color:#333333;
+          }
+          input:focus,
+          .h-select-selection:focus   {
+            box-shadow: none;
+          }
+          // &.no-label .h-form-item-content{
+          //   margin-left: 0 !important;
+          //   padding-left: 20px;
+          //   line-height: 32px;
+          // }
+        }
+      }
+      .h-row .h-datagrid{
+        // .h-datagrid-toolbar {
+        //   padding: 8px 0px;
+        // }
+        .h-table-box {
+          padding:0px;
+        }
+        .h-table-wrapper{
+          border-left:1px solid #D7DDE4;
+        }
+        .h-page {
+          margin:10px 5px 2px 5px;
+          padding: 0px;
+        }
+      }
+      .pageFooter .pageFooter-buttongroup{
+        position: absolute;
+        bottom: 9px;
+        // right: 18px;
+        left: 50%;
+        margin: 0 auto;
+      }
+    }
+    //弹出框若是分配权限的样式
+    .h-tree-search {
+      .h-modal-header-wrapper{
+        min-height: 36px;
+        .h-modal-header-title {
+          position: absolute;
+          left: 28px;
+          top: 16px;
+          span {
+            font-size: 14px;
+            color: #ffffff;
+            // font-weight: 700;
+          }
+        }
+        .h-modal-header-btn {
+          // position: absolute;
+          // left: 208px;
+          // top: 11px;
+          float: left;
+          .h-btn {
+            margin:0 5px;
+            // width: 32px;
+            height: 32px;
+            // padding:0;
+            i{
+              font-size: 12px;
+            }
+          }
+        }
+        .h-modal-header-sort {
+          // position: absolute;
+          // right: 100px;
+          // top: 11px;
+          float: right;
+          .h-btn {
+            margin:0 10px;
+            width: 32px;
+            height: 32px;
+            padding:0;
+          }
+        }
+      }
+      .h-tree-content {
+        //overflow: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
+        .h-tree-self {
+          position: relative;
+          // width: 50%;
+          .h-btn {
+            padding: 3px 10px;
+            .h-icon {
+              font-size: 13px;
+            }
+            > .h-icon + span {
+              margin-left: 0;
+            }
+          }
+          .h-tree-title-self {
+            width: 100%;
+            /* margin-left: -20px !important;
+            padding-left: 24px !important; */
+            padding-right: 140px !important;
+            overflow: hidden;
+          }
+          .h-tree-title-search {
+            color: rgb(51, 51, 51);
+            font-weight: bold;
+          }
+          .h-tree-check {
+            display: inline-block;
+            position: absolute;
+            right: 0;
+          }
+        }
+      }
+      .pageFooter .pageFooter-buttongroup{
+        position: absolute;
+        bottom: 9px;
+        // right: 18px;
+        left: 50%;
+        margin: 0 auto;
+      }
+    }
+  }
+  .h-modal-footer {
+    .h-modal-setUser-footer {
+      height: 25px;
+    }
+  }
+}
+

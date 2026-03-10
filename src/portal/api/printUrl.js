@@ -1,0 +1,16 @@
+export default {
+  "/pe/print/voucherPrint/acctVoucherPrintDetail" : () => import(/* webpackChunkName: "pe/print/voucherPrint/acctVoucherPrintDetail" */`/src/portal/views/bizViews/pe/print/voucherPrint/acctVoucherPrintDetail.vue`),
+  "/pe/print/voucherPrint/acptVoucherPrintDetail": () => import(/* webpackChunkName: "pe/print/voucherPrint/acptVoucherPrintDetail" */`/src/portal/views/bizViews/pe/print/voucherPrint/acptVoucherPrintDetail.vue`),
+  "/pe/print/voucherPrint/acptBatchVoucherPrintDetail": () => import(/* webpackChunkName: "pe/print/voucherPrint/acptBatchVoucherPrintDetail" */`/src/portal/views/bizViews/pe/print/voucherPrint/acptBatchVoucherPrintDetail.vue`),
+  "/pe/print/voucherPrint/acptCorpVoucherPrintDetail": () => import(/* webpackChunkName: "pe/print/voucherPrint/acptCorpVoucherPrintDetail" */`/src/portal/views/bizViews/pe/print/voucherPrint/acptCorpVoucherPrintDetail.vue`),
+  "/pe/print/voucherPrint/discVoucherPrintDetail": () => import(/* webpackChunkName: "pe/print/voucherPrint/discVoucherPrintDetail" */`/src/portal/views/bizViews/pe/print/voucherPrint/discVoucherPrintDetail.vue`),
+  "/pe/print/voucherPrint/discBatchVoucherPrintDetail": () => import(/* webpackChunkName: "pe/print/voucherPrint/discBatchVoucherPrintDetail" */`/src/portal/views/bizViews/pe/print/voucherPrint/discBatchVoucherPrintDetail.vue`),
+  "/pe/print/voucherPrint/prsttnVoucherPrintDetail": () => import(/* webpackChunkName: "pe/print/voucherPrint/prsttnVoucherPrintDetail" */`/src/portal/views/bizViews/pe/print/voucherPrint/prsttnVoucherPrintDetail.vue`),
+  "/pe/print/voucherPrint/prsttnBatchVoucherPrintDetail": () => import(/* webpackChunkName: "pe/print/voucherPrint/prsttnBatchVoucherPrintDetail" */`/src/portal/views/bizViews/pe/print/voucherPrint/prsttnBatchVoucherPrintDetail.vue`),
+  "/pe/print/voucherPrint/quoteBatchVoucherPrintDetail": () => import(/* webpackChunkName: "pe/print/voucherPrint/quoteBatchVoucherPrintDetail" */`/src/portal/views/bizViews/pe/print/voucherPrint/quoteBatchVoucherPrintDetail.vue`),
+  "/pe/print/voucherPrint/rediscBatchVoucherPrintDetail": () => import(/* webpackChunkName: "pe/print/voucherPrint/rediscBatchVoucherPrintDetail" */`/src/portal/views/bizViews/pe/print/voucherPrint/rediscBatchVoucherPrintDetail.vue`),
+  "/pe/print/voucherPrint/cancelAcctVoucherPrintDetail": () => import(/* webpackChunkName: "pe/print/voucherPrint/acctVoucherPrintDetail" */`/src/portal/views/bizViews/pe/print/voucherPrint/acctVoucherPrintDetail.vue`),
+  "/pe/print/voucherPrint/impawnSignVoucherPrintDetail": () => import(/* webpackChunkName: "pe/print/voucherPrint/impawnSignVoucherPrintDetail" */`/src/portal/views/bizViews/pe/print/voucherPrint/impawnSignVoucherPrintDetail.vue`),
+  "/pe/print/voucherPrint/unImpawnEndorseVoucherPrintDetail": () => import(/* webpackChunkName: "pe/print/voucherPrint/unImpawnEndorseVoucherPrintDetail" */`/src/portal/views/bizViews/pe/print/voucherPrint/unImpawnEndorseVoucherPrintDetail.vue`),
+  "/pe/print/voucherPrint/acctVoucherPrintDetailStd" : () => import(/* webpackChunkName: "pe/print/voucherPrint/acctVoucherPrintDetailStd" */`/src/portal/views/bizViews/pe/print/voucherPrint/acctVoucherPrintDetailStd.vue`),
+}
