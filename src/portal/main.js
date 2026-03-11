@@ -332,10 +332,15 @@ router.beforeEach((to, from, next) => {
   // 此时尚未生成动态路由，后面的菜单逻辑可能认为目标无匹配并
   // 重定向回 '/'，触发浏览器控制台警告“Redirected when going from
   // "/login" to "/mainIndex" via a navigation guard”。
-  // 直接放行可避免该警告。
+  // 直接放行可避免该警告。但是放行的同时需要完成菜单初始化，
+  // 否则首页组件会因为 store.menusRoot 为空而不显示任何菜单，
+  // 直到用户刷新页面（router.beforeEach 再次执行）才补上。
   if (from.path === '/login' && to.path === '/mainIndex') {
-    next();
-    hui.hLoadingBar.finish();
+    // 先异步拉取菜单并生成路由，再继续导航
+    initMenuList(() => {
+      next();
+      hui.hLoadingBar.finish();a
+    });
     return;
   }
   if (window.LOCAL_CONFIG.isToken) {
