@@ -7,7 +7,7 @@ module.exports = defineConfig({
   configureWebpack: {
     resolve: {
       alias: {
-        // '@': path.resolve(__dirname, 'src/portal/'),
+        '@': path.resolve(__dirname, 'src/portal/'),
         'common': path.resolve(__dirname, 'src/common/'),
         // 如果有其他别名，也可以加在这里
       }
